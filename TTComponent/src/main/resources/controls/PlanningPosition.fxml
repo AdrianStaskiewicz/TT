@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<!--<fx:root type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">-->
+<!--</fx:root>-->
+
+<fx:root fx:id="base" style="-fx-border-color: #DCE2EA; -fx-background-color: #FEFEFF;" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <cursor>
+        <Cursor fx:constant="OPEN_HAND" />
+    </cursor>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+        <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="100.0" prefWidth="100.0" />
+        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="120.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#setSelected">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></CheckBox>
+                <Button fx:id="description" alignment="TOP_LEFT" onAction="#setClicked" style="-fx-background-color: transparent;" text="To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian" wrapText="true" GridPane.columnIndex="2">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                    <padding>
+                        <Insets top="-1.0" />
+                    </padding></Button>
+            </children>
+        </GridPane>
+        <Label fx:id="person" text="Adrian Staskiewicz" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <GridPane GridPane.columnIndex="5" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints valignment="CENTER" vgrow="NEVER" />
+            </rowConstraints>
+            <children>
+                <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" text="Button" GridPane.columnIndex="2" />
+                <Button layoutX="10.0" layoutY="1528.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" text="Button" GridPane.columnIndex="4" />
+                <ProgressBar fx:id="progress" progress="0.0" />
+            </children>
+        </GridPane>
+    </children>
+</fx:root>

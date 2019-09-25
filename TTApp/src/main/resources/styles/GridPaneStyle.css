@@ -1,0 +1,7 @@
+.date-pane{
+    -fx-border-radius: 5 5 5 5;
+    -fx-border-color: #828588;
+
+    -fx-background-radius: 5 5 5 5;
+    -fx-background-color: #828588;
+}
