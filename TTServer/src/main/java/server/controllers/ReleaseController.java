@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import others.ReleaseVersionNumberPack;
 import server.services.ReleaseService;
 
 import javax.inject.Inject;
@@ -37,6 +38,54 @@ public class ReleaseController {
         ReleaseDto releaseDto = releaseService.getById(releaseId);
 
         return new ResponseEntity(releaseDto, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getallupcomingassignedtoproject", method = RequestMethod.POST)
+    public ResponseEntity getAllUpcomingAssignedToProjectByProjectId(@RequestBody @Valid Long projectId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<ReleaseDto> projectDtos = releaseService.getAllUpcomingAssignedToProjectByProjectId(projectId);
+//todo
+        return new ResponseEntity(projectDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+
+    @RequestMapping(value = "/getallreleasedassignedtoproject", method = RequestMethod.POST)
+    public ResponseEntity getAllReleasedAssignedToProjectByProjectId(@RequestBody @Valid Long projectId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<ReleaseDto> projectDtos = releaseService.getAllReleasedAssignedToProjectByProjectId(projectId);
+//todo
+        return new ResponseEntity(projectDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/getallarchivedassignedtoproject", method = RequestMethod.POST)
+    public ResponseEntity getAllArchivedAssignedToProjectByProjectId(@RequestBody @Valid Long projectId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<ReleaseDto> projectDtos = releaseService.getAllArchivedAssignedToProjectByProjectId(projectId);
+//todo
+        return new ResponseEntity(projectDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/checkreleaseversionnumberavailabilityforproject", method = RequestMethod.POST)
+    public ResponseEntity checkReleaseVersionNumberAvailabilityForProjectByProjectId(@RequestBody @Valid ReleaseVersionNumberPack releaseVersionNumberPack, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        Boolean response = releaseService.checkReleaseVersionNumberAvailabilityForProjectByProjectId(releaseVersionNumberPack.getMajorNumber(), releaseVersionNumberPack.getMinorNumber(), releaseVersionNumberPack.getReleaseNumber(), releaseVersionNumberPack.getBuildNumber(), releaseVersionNumberPack.getProjectId());
+
+        return new ResponseEntity(response, new HttpHeaders(), HttpStatus.OK);
     }
 
     @Transactional

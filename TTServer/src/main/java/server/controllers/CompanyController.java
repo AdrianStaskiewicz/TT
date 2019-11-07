@@ -39,6 +39,17 @@ public class CompanyController {
         return new ResponseEntity(companyDto, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getallconnectedtouser", method = RequestMethod.POST)
+    public ResponseEntity getAllConnectedToUserByUserId(@RequestBody @Valid Long userId, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<CompanyDto> companyDtos = companyService.getAllConnectedToUserByUserId(userId);
+//todo
+        return new ResponseEntity( companyDtos, new HttpHeaders(), HttpStatus.OK);
+    }
+
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody @Valid Company company, BindingResult result) {

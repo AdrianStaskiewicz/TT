@@ -26,6 +26,17 @@ public class CompanyRequest {
         return result;
     }
 
+    public List<CompanyDto> getAllConnectedToUserByUserId(Long userId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(userId, null);
+
+        ResponseEntity<List<CompanyDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallconnectedtouser", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<CompanyDto>>() {});
+        List<CompanyDto> result = response.getBody();
+
+        return result;
+    }
+
     //TODO EXTRA METHODS HERE
 
 //    public List<CompanyDto> findAllByFarmId(Long farmId) {

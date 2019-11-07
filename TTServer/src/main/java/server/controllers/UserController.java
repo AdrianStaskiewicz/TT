@@ -39,6 +39,18 @@ public class UserController {
         return new ResponseEntity(userDto, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getallassignedtoproject", method = RequestMethod.POST)
+    public ResponseEntity getAllAssignedToProjectByProjectId(@RequestBody @Valid Long projectId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<UserDto> projectDtos = userService.getAllAssignedToProjectByProjectId(projectId);
+//todo
+        return new ResponseEntity(projectDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody @Valid User user, BindingResult result) {

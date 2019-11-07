@@ -1,5 +1,5 @@
 import controllers.TestScreenController;
-import controls.PlanningUnit;
+import controls.planningview.PlanningUnit;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +19,7 @@ public class Test extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        FXMLLoader innerLoader = new FXMLLoader(getClass().getResource("controllers/TestScreen.fxml"));
+        FXMLLoader innerLoader = new FXMLLoader(getClass().getResource("/controllers/TestScreen.fxml"));
 
         try {
             Stage stage = new Stage();
@@ -127,12 +127,12 @@ public class Test extends Application {
 
         planningUnits = new LinkedList<>();
 
-        planningUnits.add(PlanningUnit.builder().description("Napisz swoj wlasny modul").person("Anna Nowak").progress(0.7).build());
-        planningUnits.add(PlanningUnit.builder().description("Przetestuj modul").person("Jan Kowalski").progress(0.9).build());
-        planningUnits.add(PlanningUnit.builder().description("Synchronizing different computers within a local network").person("Jan Kowal").progress(0.3).build());
-        planningUnits.add(PlanningUnit.builder().description("Test").person("Jan Kowal").progress(0.3).build());
-        planningUnits.add(PlanningUnit.builder().description("Add the option in the settings screens to Maintain").person("Adrian Staskiewicz").progress(0.3).build());
-        planningUnits.add(PlanningUnit.builder().description("To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian").person("Adrian Staskiewicz").progress(0.3).build());
+        planningUnits.add(PlanningUnit.builder().title("Napisz swoj wlasny modul").person("Anna Nowak").progress(0.7).build());
+        planningUnits.add(PlanningUnit.builder().title("Przetestuj modul").person("Jan Kowalski").progress(0.9).build());
+        planningUnits.add(PlanningUnit.builder().title("Synchronizing different computers within a local network").person("Jan Kowal").progress(0.3).build());
+        planningUnits.add(PlanningUnit.builder().title("Test").person("Jan Kowal").progress(0.3).build());
+        planningUnits.add(PlanningUnit.builder().title("Add the option in the settings screens to Maintain").person("Adrian Staskiewicz").progress(0.3).build());
+        planningUnits.add(PlanningUnit.builder().title("To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian").person("Adrian Staskiewicz").progress(0.3).build());
 
 
         //TODO

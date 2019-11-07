@@ -1,5 +1,6 @@
 package server.repositories;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dtos.ReleaseDto;
 import entities.QRelease;
@@ -8,6 +9,7 @@ import entities.Release;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReleaseRepositoryImpl implements ReleaseRepositoryCustom {
@@ -27,6 +29,68 @@ public class ReleaseRepositoryImpl implements ReleaseRepositoryCustom {
                 .fetch();
 
         return result;
+    }
+
+    @Override
+    public List<ReleaseDto> getAllUpcomingAssignedToProjectByProjectId(Long projectId) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QRelease release = QRelease.release;
+        Date currentDate = new Date();
+
+        return (List<ReleaseDto>) query.select(Projections.constructor(ReleaseDto.class, release.release))
+                .from(release)
+                .where(release.project.id.eq(projectId)
+                        .and(release.releaseDate.isNull())
+                        .and(release.archived.isNull().or(release.archived.isFalse())))
+                .fetch();
+    }
+
+    @Override
+    public List<ReleaseDto> getAllReleasedAssignedToProjectByProjectId(Long projectId) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QRelease release = QRelease.release;
+        Date currentDate = new Date();
+
+        return (List<ReleaseDto>) query.select(Projections.constructor(ReleaseDto.class, release.release))
+                .from(release)
+                .where(release.project.id.eq(projectId)
+                        .and(release.releaseDate.isNotNull())
+                        .and(release.archived.isNull().or(release.archived.isFalse())))
+                .fetch();
+    }
+
+
+    @Override
+    public List<ReleaseDto> getAllArchivedAssignedToProjectByProjectId(Long projectId) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QRelease release = QRelease.release;
+
+        return (List<ReleaseDto>) query.select(Projections.constructor(ReleaseDto.class, release.release))
+                .from(release)
+                .where(release.project.id.eq(projectId)
+                        .and(release.archived.eq(Boolean.TRUE)))
+                .fetch();
+    }
+
+    @Override
+    public Boolean checkReleaseVersionNumberAvailabilityForProjectByProjectId(Integer majorNumber, Integer minorNumber, Integer releaseNumber, Integer buildNumber, Long projectId) {
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QRelease release = QRelease.release;
+
+        List<Release> releases = query.select(release)
+                .from(release)
+                .where(release.majorNumber.eq(majorNumber)
+                        .and(release.minorNumber.eq(minorNumber))
+                        .and(release.releaseNumber.eq(releaseNumber))
+                        .and(release.buildNumber.eq(buildNumber))
+                        .and(release.project.id.eq(projectId)))
+                .fetch();
+
+        return releases.isEmpty();
     }
 
     @Override

@@ -1,0 +1,79 @@
+.combo-box .list-cell{
+    -fx-background: transparent;
+    /*-fx-background-color: transparent;*/
+    /*-fx-text-fill: -fx-text-base-color;*/
+    /*-fx-padding: 3 0 2 7;*/
+    /*-fx-cell-size: 1.66667em;*/
+    -fx-text-fill: rgb(255,255,255);
+    -fx-font-weight: bold;
+}
+
+
+
+
+.combo-box-popup .list-view {
+    -fx-background-color: rgb(255,255,255);
+    /*-fx-background-insets: 0, 1;*/
+    /*-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 8, 0.0, 0, 0);*/
+}
+
+
+
+
+.combo-box-popup .list-view .list-cell {
+    -fx-padding: 5 5 5 5;
+    -fx-cursor: hand;
+    /* No alternate highlighting */
+    -fx-background-color: rgb(255,255,255);
+    -fx-text-fill: rgb(0,0,0);
+}
+.combo-box-popup .list-view .list-cell:hover {
+    /*-fx-background: -fx-accent;*/
+    /*-fx-background: rgb(255,255,255);*/
+    /*-fx-background-color: -fx-sel ection-bar;*/
+    -fx-background-color: rgb(128, 177, 237);
+    -fx-text-fill: rgb(0,0,0);
+    -fx-font-weight: bold;
+}
+.combo-box-popup .list-view .list-cell:selected{
+    /*-fx-background: -fx-accent;*/
+    -fx-background: rgb(255,255,255);
+    /*-fx-background-color: -fx-sel ection-bar;*/
+    -fx-background-color: rgb(107, 156, 211);
+    -fx-text-fill: rgb(0,0,0);
+    -fx-font-weight: bold;
+}
+
+
+/*.combo-box-popup .list-view .list-cell:filled {*/
+    /*-fx-background-color: rgb(107, 156, 211);*/
+    /*-fx-font-weight: bold;*/
+    /*-fx-text-fill: #ffffff;*/
+/*}*/
+
+.combo-box-base {
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";*/
+    -fx-background-color: transparent;
+    -fx-background-radius: 2 2 2 2;
+    /*-fx-background-insets: 0 0 -1 0, 0, 1, 2;*/
+    -fx-padding: 0;
+    -fx-border-style: none;
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: #bfbfbf;
+    -fx-text-fill: #ffffff;
+}
+.combo-box-base:hover {
+    -fx-background-color: rgba(255, 255, 255, .5);
+}
+/*.combo-box-base:showing{*/
+    /*-fx-color: -fx-pressed-base;*/
+/*}*/
+/*.combo-box-base:focused {*/
+    /*!*-fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;*!*/
+    /*!*-fx-background-radius: 6.4, 4, 5, 3;*!*/
+    /*!*-fx-background-insets: -1.4, 0, 1, 2;*!*/
+    /*-fx-text-fill: red;*/
+/*}*/
+.combo-box-base:disabled {
+    -fx-opacity: .4;
+}

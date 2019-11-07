@@ -1,9 +1,10 @@
 package controllers;
 
-import controls.ProjectUnit;
-import controls.ReleaseView;
+import controls.releaseview.ReleaseUnit;
+import controls.releaseview.ReleaseView;
 import converters.ProjectConverter;
-import dtos.ProjectDto;
+import converters.ReleaseConverter;
+import dtos.ReleaseDto;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +17,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Getter;
 import lombok.Setter;
-import requests.ProjectRequest;
 import requests.ReleaseRequest;
 
 import java.io.IOException;
@@ -53,16 +53,16 @@ public class ReleaseSubScreenController implements Initializable {
     }
 
     public void initializeData() {
-//        activeProjects.setDisable(Boolean.TRUE);
-//        List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
-//
-//        List<ProjectUnit> projectUnits = new LinkedList<>();
-//
-//        for (ProjectDto projectDto : projectDtos) {
-//            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
-//        }
-//
-//        projectView.setValue(projectUnits);
+        upcomingReleases.setDisable(Boolean.TRUE);
+        List<ReleaseDto> releaseDtos = releaseRequest.getAllUpcomingAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
+
+        List<ReleaseUnit> releaseUnits = new LinkedList<>();
+
+        for (ReleaseDto releaseDto : releaseDtos) {
+            releaseUnits.add(ReleaseConverter.dtoToUnit(releaseDto));
+        }
+
+        releaseView.setValue(releaseUnits);
     }
 
     @FXML
@@ -99,58 +99,84 @@ public class ReleaseSubScreenController implements Initializable {
 
 //        popupScreenController.setScene(popupScene);
         addReleasePopupController.setStage(newWindow);
+        addReleasePopupController.setCurrentProject(mainScreenController.getContextHandler().getCurrentProject());
+        addReleasePopupController.initializeData();
 
         newWindow.showAndWait();
+
+        refreshSelectedReleaseList();
     }
 
     @FXML
-    public void upcomingReleases(){
-//        activeProjects.setDisable(Boolean.TRUE);
-//        upcomingProjects.setDisable(Boolean.FALSE);
-//        endedProjects.setDisable(Boolean.FALSE);
-//
-//        List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
-//
-//        List<ProjectUnit> projectUnits = new LinkedList<>();
-//
-//        for (ProjectDto projectDto : projectDtos) {
-//            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
-//        }
-//
-//        projectView.setValue(projectUnits);
+    public void upcomingReleases() {
+        upcomingReleases.setDisable(Boolean.TRUE);
+        releasedReleases.setDisable(Boolean.FALSE);
+        archivedReleases.setDisable(Boolean.FALSE);
+
+        getAllUpcomingReleases();
     }
 
     @FXML
-    public void releasedReleases(){
-//        activeProjects.setDisable(Boolean.FALSE);
-//        upcomingProjects.setDisable(Boolean.TRUE);
-//        endedProjects.setDisable(Boolean.FALSE);
-//
-//        List<ProjectDto> projectDtos = projectRequest.getAllUpcomingAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
-//
-//        List<ProjectUnit> projectUnits = new LinkedList<>();
-//
-//        for (ProjectDto projectDto : projectDtos) {
-//            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
-//        }
-//
-//        projectView.setValue(projectUnits);
+    public void releasedReleases() {
+        upcomingReleases.setDisable(Boolean.FALSE);
+        releasedReleases.setDisable(Boolean.TRUE);
+        archivedReleases.setDisable(Boolean.FALSE);
+
+        getAllReleasedReleases();
     }
 
     @FXML
-    public void archivedReleases(){
-//        activeProjects.setDisable(Boolean.FALSE);
-//        upcomingProjects.setDisable(Boolean.FALSE);
-//        endedProjects.setDisable(Boolean.TRUE);
-//
-//        List<ProjectDto> projectDtos = projectRequest.getAllEndedAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
-//
-//        List<ProjectUnit> projectUnits = new LinkedList<>();
-//
-//        for (ProjectDto projectDto : projectDtos) {
-//            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
-//        }
-//
-//        projectView.setValue(projectUnits);
+    public void archivedReleases() {
+        upcomingReleases.setDisable(Boolean.FALSE);
+        releasedReleases.setDisable(Boolean.FALSE);
+        archivedReleases.setDisable(Boolean.TRUE);
+
+        getAllArchivedReleases();
+    }
+
+    private void refreshSelectedReleaseList() {
+        if (upcomingReleases.isDisable()) {
+            getAllUpcomingReleases();
+        } else if (releasedReleases.isDisable()) {
+            getAllReleasedReleases();
+        } else if (archivedReleases.isDisable()) {
+            getAllArchivedReleases();
+        }
+    }
+
+    private void getAllUpcomingReleases() {
+        List<ReleaseDto> releaseDtos = releaseRequest.getAllUpcomingAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
+
+        List<ReleaseUnit> projectUnits = new LinkedList<>();
+
+        for (ReleaseDto releaseDto : releaseDtos) {
+            projectUnits.add(ReleaseConverter.dtoToUnit(releaseDto));
+        }
+
+        releaseView.setValue(projectUnits);
+    }
+
+    private void getAllReleasedReleases() {
+        List<ReleaseDto> releaseDtos = releaseRequest.getAllReleasedAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
+
+        List<ReleaseUnit> projectUnits = new LinkedList<>();
+
+        for (ReleaseDto releaseDto : releaseDtos) {
+            projectUnits.add(ReleaseConverter.dtoToUnit(releaseDto));
+        }
+
+        releaseView.setValue(projectUnits);
+    }
+
+    private void getAllArchivedReleases() {
+        List<ReleaseDto> releaseDtos = releaseRequest.getAllArchivedAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
+
+        List<ReleaseUnit> projectUnits = new LinkedList<>();
+
+        for (ReleaseDto releaseDto : releaseDtos) {
+            projectUnits.add(ReleaseConverter.dtoToUnit(releaseDto));
+        }
+
+        releaseView.setValue(projectUnits);
     }
 }

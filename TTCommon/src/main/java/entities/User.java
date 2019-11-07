@@ -54,6 +54,6 @@ public class User {
     private Date lastActivityDate;
 
     public String toString() {
-        return "";
+        return this.displayName;
     }
 }

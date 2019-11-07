@@ -1,10 +1,9 @@
 package controllers;
 
-import controls.ProjectUnit;
-import controls.ProjectView;
+import controls.projectview.ProjectUnit;
+import controls.projectview.ProjectView;
 import converters.ProjectConverter;
 import dtos.ProjectDto;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -99,16 +98,53 @@ public class ProjectSubScreenController implements Initializable {
 
 //        popupScreenController.setScene(popupScene);
         addProjectPopupController.setStage(newWindow);
+        addProjectPopupController.setCurrentUser(mainScreenController.getContextHandler().getCurrentUser());
+        addProjectPopupController.initializeData();
 
         newWindow.showAndWait();
+
+        refreshSelectedProjectList();
+
     }
 
     @FXML
-    public void activeProjects(){
+    public void activeProjects() {
         activeProjects.setDisable(Boolean.TRUE);
         upcomingProjects.setDisable(Boolean.FALSE);
         endedProjects.setDisable(Boolean.FALSE);
 
+        getAllActiveProjects();
+    }
+
+    @FXML
+    public void upcomingProjects() {
+        activeProjects.setDisable(Boolean.FALSE);
+        upcomingProjects.setDisable(Boolean.TRUE);
+        endedProjects.setDisable(Boolean.FALSE);
+
+        getAllUpcomingProjects();
+    }
+
+    @FXML
+    public void endedProjects() {
+        activeProjects.setDisable(Boolean.FALSE);
+        upcomingProjects.setDisable(Boolean.FALSE);
+        endedProjects.setDisable(Boolean.TRUE);
+
+        getAllEndedProjects();
+    }
+
+    private void refreshSelectedProjectList() {
+        if (activeProjects.isDisable()) {
+            getAllActiveProjects();
+        } else if (upcomingProjects.isDisable()) {
+            getAllUpcomingProjects();
+        } else if (endedProjects.isDisable()) {
+            getAllEndedProjects();
+        }
+    }
+
+    private void getAllActiveProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
         List<ProjectUnit> projectUnits = new LinkedList<>();
@@ -120,12 +156,7 @@ public class ProjectSubScreenController implements Initializable {
         projectView.setValue(projectUnits);
     }
 
-    @FXML
-    public void upcomingProjects(){
-        activeProjects.setDisable(Boolean.FALSE);
-        upcomingProjects.setDisable(Boolean.TRUE);
-        endedProjects.setDisable(Boolean.FALSE);
-
+    private void getAllUpcomingProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllUpcomingAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
         List<ProjectUnit> projectUnits = new LinkedList<>();
@@ -137,12 +168,7 @@ public class ProjectSubScreenController implements Initializable {
         projectView.setValue(projectUnits);
     }
 
-    @FXML
-    public void endedProjects(){
-        activeProjects.setDisable(Boolean.FALSE);
-        upcomingProjects.setDisable(Boolean.FALSE);
-        endedProjects.setDisable(Boolean.TRUE);
-
+    private void getAllEndedProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllEndedAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
         List<ProjectUnit> projectUnits = new LinkedList<>();

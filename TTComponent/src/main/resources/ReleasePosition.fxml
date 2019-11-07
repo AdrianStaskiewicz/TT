@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<!--<fx:root type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">-->
+<!--</fx:root>-->
+<?import controls.externaldateview.ExternalDateView?>
+
+<fx:root style="-fx-background-color: #FEFEFF; -fx-border-color: #DCE2EA;" type="GridPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+      <ColumnConstraints />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints />
+      <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <GridPane GridPane.columnIndex="3" GridPane.rowIndex="1">
+          <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+              <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints maxHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+              <GridPane>
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="NEVER" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="120.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <children>
+                            <Button fx:id="number" onAction="#setClicked" style="-fx-background-color: transparent;" text="Name" wrapText="true">
+                                <font>
+                                    <Font name="System Bold" size="17.0" />
+                                </font>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="-1.0" />
+                           </padding>
+                        </Button>
+                        <Separator opacity="0.0" orientation="VERTICAL" />
+                        <Button fx:id="name" layoutX="10.0" layoutY="10.0" onAction="#setClicked" style="-fx-background-color: transparent;" text="Name" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="-1.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </HBox>
+                  </children>
+              </GridPane>
+            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2">
+                <children>
+                    <ExternalDateView fx:id="date" alignment="CENTER"/>
+                </children>
+            </HBox>
+          </children>
+      </GridPane>
+          <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#setSelected" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <cursor>
+                  <Cursor fx:constant="HAND" />
+              </cursor>
+      </CheckBox>
+      <Label fx:id="focus" text="Label" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+   </children>
+</fx:root>

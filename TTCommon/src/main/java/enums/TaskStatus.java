@@ -3,6 +3,7 @@ package enums;
 import helpers.LangHelper;
 
 public enum TaskStatus {
+    NEW('N'),
     OPEN('O'),
     CLOSED('C');
 

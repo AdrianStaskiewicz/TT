@@ -11,6 +11,8 @@ public interface CompanyRepositoryCustom {
 
     CompanyDto getById(Long companyId);
 
+    List<CompanyDto> getAllConnectedToUserByUserId(Long userId);
+
     Company saveCustom(Company company);
 
     List<Company> saveCustom(List<Company> companies);

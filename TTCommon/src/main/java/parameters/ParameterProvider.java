@@ -15,5 +15,5 @@ public class ParameterProvider {
     public static final String DATABASE_CONNECTOR_DATABASE_PASSWORD = "ASS2019";
     public static final String DATABASE_CONNECTOR_DATABASE_URL = "jdbc:sqlserver://"+DATABASE_CONNECTOR_DATABASE_SERVER_IP+":"+DATABASE_CONNECTOR_DATABASE_PORT_NUMBER+";databasename="+DATABASE_CONNECTOR_DATABASE_NAME;
 
-    public static final String WINDOW_TITLE = "Agricultural Support System";
+    public static final String WINDOW_TITLE = "Task Tracker";
 }

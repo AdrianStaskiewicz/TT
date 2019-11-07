@@ -3,6 +3,7 @@ package server.repositories;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dtos.UserDto;
+import entities.QParticipation;
 import entities.User;
 import entities.QUser;
 import others.LoginPack;
@@ -29,6 +30,21 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
                 .fetchOne();
 
         return result;
+    }
+
+    @Override
+    public List<UserDto> getAllAssignedToProjectByProjectId(Long projectId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QUser user = QUser.user;
+        QParticipation participation = QParticipation.participation;
+
+        return (List<UserDto>) query.select(Projections.constructor(UserDto.class, user.user))
+                .from(user)
+                .leftJoin(participation)
+                .on(participation.contributor.id.eq(user.id))
+                .where(participation.project.id.eq(projectId))
+                .fetch();
     }
 
     @Override

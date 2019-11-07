@@ -64,4 +64,8 @@ public class UserDto {
         user.setLastActivityDate(this.lastActivityDate);
         return user;
     }
+
+    public String toString(){
+        return this.displayName;
+    }
 }

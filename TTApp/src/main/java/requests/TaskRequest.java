@@ -26,6 +26,31 @@ public class TaskRequest {
         return result;
     }
 
+    public List<TaskDto> getAllProductBacklogByProjectId(Long projectId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(projectId, null);
+
+        ResponseEntity<List<TaskDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallproductbacklog", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<TaskDto>>() {
+        });
+        List<TaskDto> result = response.getBody();
+
+        return result;
+
+    }
+
+    public List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(releaseId, null);
+
+        ResponseEntity<List<TaskDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallassignedtorelease", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<TaskDto>>() {
+        });
+        List<TaskDto> result = response.getBody();
+
+        return result;
+    }
+
     //TODO EXTRA METHODS HERE
 
 //    public List<TaskDto> findAllByFarmId(Long farmId) {

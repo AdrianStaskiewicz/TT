@@ -12,23 +12,6 @@ import parameters.ParameterProvider;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-//
-//public class Mainbeta {
-//    public static void main(String[] args) {
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        Address test = restTemplate.getForObject("http://localhost:8080/test", Address.class);
-//
-//        Address testowy = new Address();
-//        testowy.setCity("Poznań");
-//        testowy.setStreet("Królowej Jadwigi");
-//        testowy.setHouseNumber("25");
-//        testowy.setLocalNumber("5");
-//        testowy.setPostCode("60-811");
-//
-//        restTemplate.postForObject("http://localhost:8080/testb",testowy,Address.class);
-//    }
-//}
 
 public class Main extends Application {
 
@@ -64,7 +47,7 @@ public class Main extends Application {
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
-                    System.out.println("Stage is closing2");
+                    System.out.println("Stage is closing");
 //                    loginScreenController.checkConnection=Boolean.FALSE;
                 }
             });

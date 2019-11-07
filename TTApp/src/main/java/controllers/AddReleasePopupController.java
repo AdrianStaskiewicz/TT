@@ -1,24 +1,35 @@
 package controllers;
 
+import dtos.ProjectDto;
+import dtos.ReleaseDto;
+import entities.Release;
+import enums.TargetReleaseDateType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import lombok.Setter;
+import requests.ReleaseRequest;
+import utils.DateUtil;
 
 import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddReleasePopupController implements Initializable {
     @FXML
     @Setter
     private Stage stage;
+
+    @Setter
+    private ProjectDto currentProject;
 
     @FXML
     private Button closePopup;
@@ -28,14 +39,23 @@ public class AddReleasePopupController implements Initializable {
     private GridPane topBar;
 
     @FXML
-    private Spinner minor;
+    private Spinner<Integer> minor;
     @FXML
-    private Spinner major;
+    private Spinner<Integer> major;
     @FXML
-    private Spinner release;
+    private Spinner<Integer> release;
     @FXML
-    private Spinner build;
+    private Spinner<Integer> build;
+    @FXML
+    private TextField name;
+    @FXML
+    private ComboBox<TargetReleaseDateType> targetReleaseDateType;
+    @FXML
+    private DatePicker targetReleaseDate;
+    @FXML
+    private TextArea focus;
 
+    private ReleaseRequest releaseRequest;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -48,12 +68,18 @@ public class AddReleasePopupController implements Initializable {
 
     @FXML
     public void addRelease() {
+        if (validate()) {
+            ReleaseDto releaseDto = collectData();
 
+            Release release = releaseRequest.save(releaseDto.toEntity());
+
+            stage.close();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.releaseRequest = new ReleaseRequest();
 
         topBar.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -70,11 +96,52 @@ public class AddReleasePopupController implements Initializable {
             }
         });
 
+        SpinnerValueFactory<Integer> majorValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+        major.setValueFactory(majorValueFactory);
+        SpinnerValueFactory<Integer> minorValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+        minor.setValueFactory(minorValueFactory);
+        SpinnerValueFactory<Integer> releaseValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+        release.setValueFactory(releaseValueFactory);
+        SpinnerValueFactory<Integer> buildValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+        build.setValueFactory(buildValueFactory);
 
-        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
-        major.setValueFactory(valueFactory);
+//        List<TargetReleaseDateType> targetReleaseDateTypes = new ArrayList<>(TargetReleaseDateType.values());
+        TargetReleaseDateType[] targetReleaseDateTypes = TargetReleaseDateType.values();
+
+        ObservableList<TargetReleaseDateType> dateTypeList = FXCollections.observableArrayList(targetReleaseDateTypes);
+        targetReleaseDateType.setItems(dateTypeList);
+        targetReleaseDateType.getSelectionModel().select(0);
+    }
+
+    //TODO
+    public void initializeData() {
+
+    }
+
+    //TODO
+    private Boolean validate() {
+        return releaseRequest.checkReleaseVersionNumberAvailabilityForProjectByProjectId(major.getValue(), minor.getValue(), release.getValue(), build.getValue(), currentProject.getId());
+    }
 
 
+    private ReleaseDto collectData() {
+        ReleaseDto data = new ReleaseDto();
 
+        data.setMajorNumber(major.getValue());
+        data.setMinorNumber(minor.getValue());
+        data.setReleaseNumber(release.getValue());
+        data.setBuildNumber(build.getValue());
+
+        data.setName(name.getText());
+        data.setFocus(focus.getText());
+
+        data.setProject(currentProject.toEntity());
+
+        if (targetReleaseDate.getValue() != null) {
+            data.setTargetReleaseDateTime(DateUtil.toDate(targetReleaseDate.getValue()));
+            data.setTargetReleaseDateType(targetReleaseDateType.getValue());
+        }
+
+        return data;
     }
 }

@@ -9,6 +9,8 @@ public interface UserService {
 
     UserDto getById(Long userId);
 
+    List<UserDto> getAllAssignedToProjectByProjectId(Long projectId);
+
     User save(User user);
 
     List<User> save(List<User> users);

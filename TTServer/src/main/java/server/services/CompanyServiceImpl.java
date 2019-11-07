@@ -24,6 +24,10 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.getById(companyId);
     }
 
+    public List<CompanyDto> getAllConnectedToUserByUserId(Long userId) {
+        return companyRepository.getAllConnectedToUserByUserId(userId);
+    }
+
     @Override
     public Company save(Company company) {
         return companyRepository.saveCustom(company);

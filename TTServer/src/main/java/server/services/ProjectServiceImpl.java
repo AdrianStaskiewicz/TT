@@ -25,27 +25,27 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectDto> getAllAssignedToUserByUserId(Long userId){
+    public List<ProjectDto> getAllAssignedToUserByUserId(Long userId) {
         return projectRepository.getAllAssignedToUserByUserId(userId);
     }
 
     @Override
-    public List<ProjectDto> getAllActiveAssignedToUserByUserId(Long userId){
+    public List<ProjectDto> getAllActiveAssignedToUserByUserId(Long userId) {
         return projectRepository.getAllActiveAssignedToUserByUserId(userId);
     }
 
     @Override
-    public List<ProjectDto> getAllUpcomingAssignedToUserByUserId(Long userId){
+    public List<ProjectDto> getAllUpcomingAssignedToUserByUserId(Long userId) {
         return projectRepository.getAllUpcomingAssignedToUserByUserId(userId);
     }
 
     @Override
-    public List<ProjectDto> getAllEndedAssignedToUserByUserId(Long userId){
+    public List<ProjectDto> getAllEndedAssignedToUserByUserId(Long userId) {
         return projectRepository.getAllEndedAssignedToUserByUserId(userId);
     }
 
     @Override
-    public ProjectDto getFirstAssignedToUserByUserId(Long userId){
+    public ProjectDto getFirstAssignedToUserByUserId(Long userId) {
         return projectRepository.getFirstAssignedToUserByUserId(userId);
     }
 

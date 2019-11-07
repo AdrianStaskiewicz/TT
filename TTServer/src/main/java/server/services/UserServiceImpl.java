@@ -25,6 +25,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getAllAssignedToProjectByProjectId(Long projectId){
+        return userRepository.getAllAssignedToProjectByProjectId(projectId);
+    }
+
+    @Override
     public User save(User user) {
         return userRepository.saveCustom(user);
     }

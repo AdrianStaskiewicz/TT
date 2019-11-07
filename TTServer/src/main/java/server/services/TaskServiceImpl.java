@@ -25,7 +25,20 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<TaskDto> getAllProductBacklogByProjectId(Long projectId){
+        return taskRepository.getAllProductBacklogByProjectId(projectId);
+    }
+
+    @Override
+    public List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId){
+        return taskRepository.getAllAssignedToReleaseByReleaseId(releaseId);
+    }
+
+    @Override
     public Task save(Task task) {
+
+        Integer taskNumber = taskRepository.getNumberForNewTaskByProjectId(task.getProject().getId());
+        task.setTaskNumber(taskNumber + 1);
         return taskRepository.saveCustom(task);
     }
 

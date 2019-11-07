@@ -9,6 +9,8 @@ public interface CompanyService {
 
     CompanyDto getById(Long companyId);
 
+    List<CompanyDto> getAllConnectedToUserByUserId(Long userId);
+
     Company save(Company company);
 
     List<Company> save(List<Company> companies);

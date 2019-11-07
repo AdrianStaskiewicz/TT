@@ -35,6 +35,10 @@ public class Release {
     private String name;
     @Column(name = "FOCUS")
     private String focus;
+    @Column(name = "RELEASE_DATE")
+    private Date releaseDate;
+    @Column(name = "ARCHIVED")
+    private Boolean archived;
     @Enumerated(EnumType.STRING)
     @Column(name = "TARGET_RELEASE_DATE_TYPE")
     private TargetReleaseDateType targetReleaseDateType;

@@ -25,6 +25,26 @@ public class ReleaseServiceImpl implements ReleaseService {
     }
 
     @Override
+    public List<ReleaseDto> getAllUpcomingAssignedToProjectByProjectId(Long projectId) {
+        return releaseRepository.getAllUpcomingAssignedToProjectByProjectId(projectId);
+    }
+
+    @Override
+    public List<ReleaseDto> getAllReleasedAssignedToProjectByProjectId(Long projectId) {
+        return releaseRepository.getAllReleasedAssignedToProjectByProjectId(projectId);
+    }
+
+    @Override
+    public List<ReleaseDto> getAllArchivedAssignedToProjectByProjectId(Long projectId) {
+        return releaseRepository.getAllArchivedAssignedToProjectByProjectId(projectId);
+    }
+
+    @Override
+    public Boolean checkReleaseVersionNumberAvailabilityForProjectByProjectId(Integer majorNumber, Integer minorNumber, Integer releaseNumber, Integer buildNumber, Long projectId) {
+        return releaseRepository.checkReleaseVersionNumberAvailabilityForProjectByProjectId(majorNumber, minorNumber, releaseNumber, buildNumber, projectId);
+    }
+
+    @Override
     public Release save(Release release) {
         return releaseRepository.saveCustom(release);
     }

@@ -39,6 +39,30 @@ public class TaskController {
         return new ResponseEntity(taskDto, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getallproductbacklog", method = RequestMethod.POST)
+    public ResponseEntity getAllProductBacklogByProjectId(@RequestBody @Valid Long projectId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<TaskDto> taskDtos = taskService.getAllProductBacklogByProjectId(projectId);
+//todo
+        return new ResponseEntity(taskDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/getallassignedtorelease", method = RequestMethod.POST)
+    public ResponseEntity getAllAssignedToReleaseByReleaseId(@RequestBody @Valid Long releaseId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<TaskDto> taskDtos = taskService.getAllAssignedToReleaseByReleaseId(releaseId);
+//todo
+        return new ResponseEntity(taskDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody @Valid Task task, BindingResult result) {

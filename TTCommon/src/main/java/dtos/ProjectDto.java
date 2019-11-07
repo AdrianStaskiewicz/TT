@@ -42,6 +42,6 @@ public class ProjectDto {
 
     @Override
     public String toString() {
-        return title + " | " + company.toString();
+        return company!=null? title + " | " + company.toString(): title;
     }
 }

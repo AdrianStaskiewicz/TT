@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="NEVER" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints vgrow="NEVER" />
+   </rowConstraints>
+   <children>
+      <GridPane fx:id="pane">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+            <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="2.0" minHeight="2.0" prefHeight="2.0" vgrow="SOMETIMES" />
+            <RowConstraints fillHeight="false" valignment="CENTER" vgrow="NEVER" />
+            <RowConstraints maxHeight="2.0" minHeight="2.0" prefHeight="2.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="date" text="Not set" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</fx:root>

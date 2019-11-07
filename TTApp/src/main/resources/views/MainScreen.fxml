@@ -208,7 +208,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <ComboBox fx:id="projectList">
+                  <ComboBox fx:id="projectList" styleClass="combo-box" stylesheets="/styles/ComboBoxStyle.css">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>

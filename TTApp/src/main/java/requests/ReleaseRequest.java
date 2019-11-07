@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import others.ReleaseVersionNumberPack;
 import parameters.Settings;
 
 import java.util.List;
@@ -26,6 +27,53 @@ public class ReleaseRequest {
         return result;
     }
 
+    public List<ReleaseDto> getAllUpcomingAssignedToProjectByProjectId(Long projectId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(projectId, null);
+
+        ResponseEntity<List<ReleaseDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallupcomingassignedtoproject", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<ReleaseDto>>() {
+        });
+        List<ReleaseDto> result = response.getBody();
+
+        return result;
+    }
+
+    public List<ReleaseDto> getAllReleasedAssignedToProjectByProjectId(Long projectId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(projectId, null);
+
+        ResponseEntity<List<ReleaseDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallreleasedassignedtoproject", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<ReleaseDto>>() {
+        });
+        List<ReleaseDto> result = response.getBody();
+
+        return result;
+    }
+
+    public List<ReleaseDto> getAllArchivedAssignedToProjectByProjectId(Long projectId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(projectId, null);
+
+        ResponseEntity<List<ReleaseDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallarchivedassignedtoproject", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<ReleaseDto>>() {
+        });
+        List<ReleaseDto> result = response.getBody();
+
+        return result;
+    }
+
+    public Boolean checkReleaseVersionNumberAvailabilityForProjectByProjectId(Integer majorNumber, Integer minorNumber, Integer releaseNumber, Integer buildNumber, Long projectId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        ReleaseVersionNumberPack releaseVersionNumberPack = new ReleaseVersionNumberPack(majorNumber, minorNumber, releaseNumber, buildNumber, projectId);
+        HttpEntity<ReleaseVersionNumberPack> requestUpdate = new HttpEntity<>(releaseVersionNumberPack, null);
+
+        ResponseEntity<Boolean> response = restTemplate.exchange(Settings.URL + CATEGORY + "checkreleaseversionnumberavailabilityforproject", HttpMethod.POST, requestUpdate, Boolean.class);
+        Boolean result = response.getBody();
+
+        return result;
+    }
     //TODO EXTRA METHODS HERE
 
 //    public List<ReleaseDto> findAllByFarmId(Long farmId) {

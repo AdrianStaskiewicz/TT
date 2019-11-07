@@ -1,5 +1,6 @@
 package server.repositories;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dtos.TaskDto;
 import entities.QTask;
@@ -27,6 +28,44 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
                 .fetch();
 
         return result;
+    }
+
+    @Override
+    public Integer getNumberForNewTaskByProjectId(Long projectId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(task.id)
+                .from(task)
+                .where(task.project.id.eq(projectId))
+                .fetch()
+                .size();
+    }
+
+    @Override
+    public List<TaskDto> getAllProductBacklogByProjectId(Long projectId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(Projections.constructor(TaskDto.class,task.task))
+                .from(task)
+                .where(task.project.id.eq(projectId)
+                .and(task.release.isNull()))
+                .fetch();
+    }
+
+    @Override
+    public List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(Projections.constructor(TaskDto.class,task.task))
+                .from(task)
+                .where(task.release.id.eq(releaseId))
+                .fetch();
     }
 
     @Override

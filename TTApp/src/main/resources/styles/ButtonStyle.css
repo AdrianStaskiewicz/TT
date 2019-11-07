@@ -147,7 +147,7 @@
     -fx-text-fill: rgb(41,56,75);
 
     -fx-border-radius: 2 2 2 2;
-    -fx-border-color: rgb(107, 156, 211);;
+    -fx-border-color: rgb(107, 156, 211);
 
     -fx-background-color: rgb(149, 203, 255);
 }
@@ -169,4 +169,11 @@
 }
 .search-button:hover{
     -fx-background-color: rgba(255, 255, 255, .8);
+}
+
+.close-popup-button{
+    -fx-background-color: transparent;
+}
+.close-popup-button:hover{
+    -fx-background-color: rgba(0,0,0,.1);
 }

@@ -26,6 +26,18 @@ public class UserRequest {
         return result;
     }
 
+    public List<UserDto> getAllAssignedToProjectByProjectId(Long projectId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(projectId, null);
+
+        ResponseEntity<List<UserDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallassignedtoproject", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<UserDto>>() {
+        });
+        List<UserDto> result = response.getBody();
+
+        return result;
+    }
+
     //TODO EXTRA METHODS HERE
 
 //    public List<UserDto> findAllByFarmId(Long farmId) {

@@ -1,7 +1,7 @@
 package controllers;
 
-import controls.TaskUnit;
-import controls.TaskView;
+import controls.taskview.TaskUnit;
+import controls.taskview.TaskView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -62,6 +62,7 @@ public class TaskBoardSubScreenController implements Initializable {
 
         CreateTaskSubScreenController controller = innerLoader.getController();
         controller.setMainScreenController(mainScreenController);
+        controller.initializeData();
 //        set objects here
 
         mainScreenController.setView(gridPane);
@@ -89,7 +90,7 @@ public class TaskBoardSubScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         all.setDisable(Boolean.TRUE);
 
-//        todo = new TaskView();
+//        todo = new taskview();
 //        todoPane.getChildren().add(todo);
 
         //TODO TEST!
@@ -100,14 +101,14 @@ public class TaskBoardSubScreenController implements Initializable {
         planningUnits.add(TaskUnit.builder().description("Test").person("Jan Kowal").progress(0.3).build());
         todo.setValue(planningUnits);
         //TODO CHANGE TO CREATING NEW ONE ONLY WHEN YOU GOT SOME DATA FROM REPO FOR ODER RELEASE THAN BACKLOG
-//        busy = new TaskView();
+//        busy = new taskview();
         busy.setValue(planningUnits);
 //        busyPane.getChildren().add(busy);
-//        done = new TaskView();
+//        done = new taskview();
         done.setValue(planningUnits);
 //        donePane.getChildren().add(done);
-//        releasePane.getChildren().add(new PlanningView());//TODO for a moment
-//        releasePane.getChildren().add(new PlanningView());//TODO for a moment
+//        releasePane.getChildren().add(new planningview());//TODO for a moment
+//        releasePane.getChildren().add(new planningview());//TODO for a moment
     }
 
     private void enableAllButtons() {

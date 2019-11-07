@@ -1,6 +1,6 @@
 package converters;
 
-import controls.ProjectUnit;
+import controls.projectview.ProjectUnit;
 import dtos.ProjectDto;
 
 public class ProjectConverter {

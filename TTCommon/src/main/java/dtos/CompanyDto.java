@@ -28,4 +28,8 @@ public class CompanyDto {
         company.setName2(this.name2);
         return company;
     }
+
+    public String toString(){
+        return name2!=null? name1+" " + name2 : name1;
+    }
 }

@@ -22,6 +22,8 @@ public class ReleaseDto {
     private Integer buildNumber;
     private String name;
     private String focus;
+    private Date releaseDate;
+    private Boolean archived;
     private TargetReleaseDateType targetReleaseDateType;
     private Date targetReleaseDateTime;
 
@@ -34,6 +36,8 @@ public class ReleaseDto {
         this.buildNumber = release.getBuildNumber();
         this.name = release.getName();
         this.focus = release.getFocus();
+        this.releaseDate = release.getReleaseDate();
+        this.archived = release.getArchived();
         this.targetReleaseDateType = release.getTargetReleaseDateType();
         this.targetReleaseDateTime = release.getTargetReleaseDateTime();
     }
@@ -48,8 +52,21 @@ public class ReleaseDto {
         release.setBuildNumber(this.buildNumber);
         release.setName(this.name);
         release.setFocus(this.focus);
+        release.setReleaseDate(this.releaseDate);
+        release.setArchived(this.archived);
         release.setTargetReleaseDateType(this.targetReleaseDateType);
         release.setTargetReleaseDateTime(this.targetReleaseDateTime);
         return release;
+    }
+
+    public String toString(){
+        return name;
+    }
+
+    public String getReleaseNumberToString(){
+        return this.majorNumber.toString()+"."
+                +this.minorNumber.toString()+"."
+                +this.releaseNumber.toString()+"."
+                +this.buildNumber.toString();
     }
 }

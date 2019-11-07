@@ -105,6 +105,7 @@ public class MainScreenController implements Initializable {
 
         PlanningSubScreenController controller = innerLoader.getController();
         controller.setMainScreenController(this);
+        controller.initializeData();
 //        set objects here
 
         setView(gridPane);
@@ -226,6 +227,8 @@ public class MainScreenController implements Initializable {
 
         ReleaseSubScreenController controller = innerLoader.getController();
         controller.setMainScreenController(this);
+        controller.initializeData();
+
 //        set objects here
 
         setView(gridPane);

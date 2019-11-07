@@ -11,6 +11,12 @@ public interface TaskRepositoryCustom {
 
     TaskDto getById(Long taskId);
 
+    Integer getNumberForNewTaskByProjectId(Long projectId);
+
+    List<TaskDto> getAllProductBacklogByProjectId(Long projectId);
+
+    List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId);
+
     Task saveCustom(Task task);
 
     List<Task> saveCustom(List<Task> tasks);
