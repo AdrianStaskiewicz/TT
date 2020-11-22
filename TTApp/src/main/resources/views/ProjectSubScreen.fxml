@@ -127,7 +127,7 @@
                                         </Button>
                                     </children>
                                 </VBox>
-                                <ProjectView fx:id="projectView" onAdd="#addProject"/>
+                                <ProjectView fx:id="projectView" onAdd="#addProject" onDelete="#deleteProject"/>
                             </children>
                         </GridPane>
                     </children>

@@ -65,6 +65,7 @@ public class MainScreenController implements Initializable {
 
         projectList.valueProperty().addListener((observable, oldValue, newValue) -> {
             contextHandler.setCurrentProject(newValue);
+            refreshDataOnSubScreen();
         });
     }
 
@@ -130,6 +131,7 @@ public class MainScreenController implements Initializable {
 
         TaskBoardSubScreenController controller = innerLoader.getController();
         controller.setMainScreenController(this);
+        controller.initializeData();
 //        set objects here
 
         setView(gridPane);
@@ -201,6 +203,7 @@ public class MainScreenController implements Initializable {
         }
 
         ProjectSubScreenController controller = innerLoader.getController();
+        contextHandler.setCurrentScreenController(controller);
         controller.setMainScreenController(this);
         controller.initializeData();
 //        set objects here
@@ -226,6 +229,7 @@ public class MainScreenController implements Initializable {
         }
 
         ReleaseSubScreenController controller = innerLoader.getController();
+        contextHandler.setCurrentScreenController(controller);
         controller.setMainScreenController(this);
         controller.initializeData();
 
@@ -250,6 +254,27 @@ public class MainScreenController implements Initializable {
     private void users() {
         enableAllButtons();
         users.setDisable(Boolean.TRUE);
+
+        FXMLLoader innerLoader = new FXMLLoader();
+        innerLoader.setLocation(this.getClass().getResource("/views/TestSubScreen.fxml"));
+//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
+//        innerLoader.setResources(bundle);
+
+        GridPane gridPane = null;
+        try {
+            gridPane = innerLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TestSubScreenController controller = innerLoader.getController();
+        contextHandler.setCurrentScreenController(controller);
+        controller.setMainScreenController(this);
+        controller.initializeData();
+
+//        set objects here
+
+        setView(gridPane);
     }
 
 
@@ -268,5 +293,19 @@ public class MainScreenController implements Initializable {
         releaseOverview.setDisable(Boolean.FALSE);
         changeLog.setDisable(Boolean.FALSE);
         users.setDisable(Boolean.FALSE);
+    }
+
+    public void refreshProjectList(){
+        ObservableList<ProjectDto> availableProjectList = FXCollections.observableArrayList(contextHandler.getAvailableProjects());
+        projectList.setItems(availableProjectList);
+    }
+
+    public void refreshProjectListAndSelectLastCreated(){
+        refreshProjectList();
+        projectList.getSelectionModel().select(getContextHandler().getAvailableProjects().size()-1);
+    }
+
+    private void refreshDataOnSubScreen(){
+        contextHandler.getCurrentScreenController().refreshData();
     }
 }

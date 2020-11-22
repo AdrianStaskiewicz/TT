@@ -17,6 +17,12 @@ public interface TaskRepositoryCustom {
 
     List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId);
 
+    List<TaskDto> getAllTodoAssignedToReleaseByReleaseId(Long releaseId);
+
+    List<TaskDto> getAllBusyAssignedToReleaseByReleaseId(Long releaseId);
+
+    List<TaskDto> getAllDoneAssignedToReleaseByReleaseId(Long releaseId);
+
     Task saveCustom(Task task);
 
     List<Task> saveCustom(List<Task> tasks);

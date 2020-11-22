@@ -43,11 +43,11 @@
                 <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <CheckBox fx:id="checkBox" mnemonicParsing="false" onAction="#setSelected">
+                <CheckBox fx:id="selector" mnemonicParsing="false" onAction="#onSelectorAction">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></CheckBox>
-                <Button fx:id="title" alignment="TOP_LEFT" onAction="#setClicked" style="-fx-background-color: transparent;" text="To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian" wrapText="true" GridPane.columnIndex="2">
+                <Button fx:id="title" alignment="TOP_LEFT" onAction="#click" style="-fx-background-color: transparent;" text="To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian" wrapText="true" GridPane.columnIndex="2">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

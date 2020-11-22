@@ -7,15 +7,16 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlanningUnit {
+public class PlanningViewPositionUnit {
 
     private Long id;
-    private Boolean select;
+    private Boolean isSelected;
     private String title;
     private String person;
     private Double progress;
+    //TODO add other values here (time ratio and priority)
 
     public String toString(){
-        return select + " " + title + " " + person + " " +progress;
+        return isSelected + " " + title + " " + person + " " +progress;
     }
 }

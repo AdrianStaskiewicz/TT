@@ -13,7 +13,8 @@
 <?import javafx.scene.text.Font?>
 
 <?import controls.releaseview.ReleaseView?>
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReleaseSubScreenController">
+<?import controls.card.CardContainer?>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TestSubScreenController">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
     </columnConstraints>
@@ -114,7 +115,7 @@
                                         </Button>
                                     </children>
                                 </VBox>
-                                <ReleaseView fx:id="releaseView" onAdd="#addRelease" onDelete="#deleteRelease"/>
+                                <CardContainer fx:id="cardContainer" onAction="#onActionTest" onAdd="#onAddTest" onSave="#onSaveTest" onDelete="#onDeleteTest"/>
                             </children>
                         </GridPane>
                     </children>

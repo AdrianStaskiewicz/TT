@@ -1,0 +1,880 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskDetailSubScreenController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="190.0" prefWidth="190.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <GridPane maxHeight="1.7976931348623157E308">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+            <GridPane style="-fx-background-color: #F0F3F5;">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" />
+                  <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="createTask" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#createTask" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Create a task" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <graphic>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="icons/create_icon.png" />
+                           </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </GridPane>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <GridPane style="-fx-background-color: #f0f3f5;" GridPane.rowIndex="2">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="15.0" prefWidth="15.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Comments:" />
+                              <Separator opacity="0.0" orientation="VERTICAL" />
+                              <Label fx:id="commentsQuantity" text="0" />
+                           </children>
+                        </HBox>
+                        <HBox GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Views:" />
+                              <Separator opacity="0.0" orientation="VERTICAL" />
+                              <Label fx:id="viewsQuantity" text="0" />
+                           </children>
+                        </HBox>
+                        <HBox GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Subscribers:" />
+                              <Separator opacity="0.0" orientation="VERTICAL" />
+                              <Label fx:id="subscribersQuantity" text="0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane style="-fx-background-color: eaedef;" GridPane.columnIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane style="-fx-background-color: #eaedef;" GridPane.rowIndex="1">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Type:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label text="Assigned to:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label text="Created by:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label text="Created:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label text="Last modified:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label text="Notifications:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font></Label>
+                                    <Label fx:id="type" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="assignedTo" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="createdBy" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="createdDate" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="modificationDate" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Button mnemonicParsing="false" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Subscribe" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Label text="Target release:" textFill="#393f48" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="targetRelease" layoutX="163.0" layoutY="59.0" text="Label" textFill="#393f48" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </GridPane>
+                              <GridPane>
+                                <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label text="Estimated effort:" textFill="#393f48">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font></Label>
+                                          <TextField prefWidth="70.0" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                       <children>
+                                          <Label text="Time spent:" textFill="#393f48">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font></Label>
+                                          <TextField prefWidth="70.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <GridPane style="-fx-background-color: #ffffff;">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <HBox GridPane.rowIndex="1">
+                                       <children>
+                                          <GridPane>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="NEVER" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                                                <ColumnConstraints hgrow="NEVER" />
+                                                <ColumnConstraints hgrow="NEVER" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <HBox GridPane.columnIndex="1">
+                                                   <children>
+                                                      <Label text="#" textFill="#393f48">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font></Label>
+                                                      <Label fx:id="number" text="001" textFill="#393f48">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font></Label>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </GridPane>
+                                          <Separator maxWidth="10.0" minWidth="10.0" opacity="0.0" orientation="VERTICAL" prefWidth="10.0" />
+                                          <Label fx:id="title" text="Label" textFill="#393f48">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font></Label>
+                                       </children>
+                                    </HBox>
+                                    <GridPane GridPane.rowIndex="7">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.rowIndex="3">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" />
+                                          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Project:" textFill="#797878" GridPane.columnIndex="1" />
+                                          <Label text="Category:" textFill="#797878" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label fx:id="projectName" text="Label" textFill="#797878" GridPane.columnIndex="3" />
+                                          <Label fx:id="category" text="Label" textFill="#797878" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane layoutX="10.0" layoutY="62.0" GridPane.rowIndex="5">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" />
+                                          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Description:" textFill="#393f48" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font></Label>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+                  <GridPane style="-fx-background-color: #F0F3F5;">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="5.0" minWidth="5.0" prefWidth="5.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <GridPane style="-fx-background-color: #F0F3F5;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                              <ColumnConstraints halignment="RIGHT" />
+                              <ColumnConstraints halignment="RIGHT" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                              <ColumnConstraints halignment="RIGHT" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="save" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#save" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Button">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="icons/save_icon.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Button fx:id="cancelEditing" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#cancelEditing" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Button">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="icons/cancel_icon.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" layoutX="302.0" layoutY="9.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <Button fx:id="enableEditing" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#enableEditing" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Button">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="icons/edit_icon.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_RIGHT" layoutX="190.0" layoutY="15.0" GridPane.columnIndex="4">
+                                 <children>
+                                    <Button fx:id="delete" contentDisplay="GRAPHIC_ONLY" disable="true" mnemonicParsing="false" onAction="#delete" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Button">
+                                       <graphic>
+                                          <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="icons/delete_icon.png" />
+                                             </image>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                        <GridPane layoutX="10.0" layoutY="10.0" style="-fx-background-color: #F0F3F5;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+                              <ColumnConstraints halignment="RIGHT" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Button fx:id="changeStatus" maxWidth="75.0" minWidth="75.0" mnemonicParsing="false" onAction="#changeStatus" prefWidth="75.0" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Close" textFill="#393f48" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+                                    <ColumnConstraints hgrow="NEVER" percentWidth="40.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <HBox alignment="CENTER_LEFT" layoutX="371.0" layoutY="10.0">
+                                       <children>
+                                          <Label text="Priority:" textFill="#393f48">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator opacity="0.0" orientation="VERTICAL" />
+                                          <Label fx:id="priority" text="Label" textFill="#393f48">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
+                                       <children>
+                                          <Label layoutX="558.0" layoutY="17.0" text="Progress:" textFill="#393f48">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator opacity="0.0" orientation="VERTICAL" />
+                                          <GridPane>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <ProgressBar fx:id="progress" prefWidth="200.0" progress="0.0" />
+                                                <Slider fx:id="progressSlider" opacity="0.0" prefWidth="150.0">
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Slider>
+                                             </children>
+                                          </GridPane>
+                                          <Label fx:id="progressValue" text="0" />
+                                          <Label text="\%" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
+                                       <children>
+                                          <Label layoutX="572.0" layoutY="17.0" text="Status:" textFill="#393f48">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Separator opacity="0.0" orientation="VERTICAL" />
+                                          <Label fx:id="status" layoutX="586.0" layoutY="17.0" text="Label" textFill="#393f48">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+      <GridPane GridPane.columnIndex="2">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ScrollPane hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" minWidth="170.0" prefWidth="170.0" style="-fx-background-color: #E0E6EC;" vbarPolicy="ALWAYS" GridPane.rowIndex="1">
+               <content>
+                  <GridPane style="-fx-background-color: #E0E6EC;">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="10.0" minWidth="10.0" prefWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" />
+                      <RowConstraints />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                      <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="ALWAYS" />
+                    </rowConstraints>
+                     <children>
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Search" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator opacity="0.0" />
+                              <TextField promptText="Search items">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <Label text="Status" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="10.0" layoutY="70.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="New" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Open" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="48.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Closed" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <children>
+                              <Label text="Activity" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="10.0" layoutY="158.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Recently added" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Recently modified" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="48.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Popular" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="48.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Created by me" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="92.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="27.0" mnemonicParsing="false" text="Asigned to me" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="114.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="44.0" mnemonicParsing="false" text="Commented by me" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="136.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="61.0" mnemonicParsing="false" text="Subscribed" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <children>
+                              <Label text="Type" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="10.0" layoutY="180.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Task/Enhancement" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Task/Feature" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="48.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Task/Fix" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="70.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Task/Other" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="92.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="27.0" mnemonicParsing="false" text="Bug request" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="114.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="44.0" mnemonicParsing="false" text="Feature request" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="136.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="61.0" mnemonicParsing="false" text="Suggestion" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="158.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="44.0" mnemonicParsing="false" text="Question" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                        <VBox GridPane.columnIndex="1" GridPane.rowIndex="9">
+                           <children>
+                              <Label text="Priority" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="10.0" layoutY="92.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Critical" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="High" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="48.0" opacity="0.0" />
+                              <CheckBox mnemonicParsing="false" text="Normal" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                              <Separator layoutX="10.0" layoutY="70.0" opacity="0.0" />
+                              <CheckBox layoutX="10.0" layoutY="27.0" mnemonicParsing="false" text="Low" textFill="#393f48">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" styleClass="submenu-menu-button" stylesheets="/styles/ButtonStyle.css" text="Apply" textFill="#393f48">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

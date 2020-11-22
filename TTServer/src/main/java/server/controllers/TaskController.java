@@ -63,6 +63,42 @@ public class TaskController {
 
     }
 
+    @RequestMapping(value = "/getalltodoassignedtorelease", method = RequestMethod.POST)
+    public ResponseEntity getAllTodoAssignedToReleaseByReleaseId(@RequestBody @Valid Long releaseId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<TaskDto> taskDtos = taskService.getAllTodoAssignedToReleaseByReleaseId(releaseId);
+//todo
+        return new ResponseEntity(taskDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/getallbusyassignedtorelease", method = RequestMethod.POST)
+    public ResponseEntity getAllBusyAssignedToReleaseByReleaseId(@RequestBody @Valid Long releaseId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<TaskDto> taskDtos = taskService.getAllBusyAssignedToReleaseByReleaseId(releaseId);
+//todo
+        return new ResponseEntity(taskDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/getalldoneassignedtorelease", method = RequestMethod.POST)
+    public ResponseEntity getAllDoneAssignedToReleaseByReleaseId(@RequestBody @Valid Long releaseId, BindingResult result){
+        if (result.hasErrors()) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        List<TaskDto> taskDtos = taskService.getAllDoneAssignedToReleaseByReleaseId(releaseId);
+//todo
+        return new ResponseEntity(taskDtos, new HttpHeaders(), HttpStatus.OK);
+
+    }
+
     @Transactional
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity save(@RequestBody @Valid Task task, BindingResult result) {

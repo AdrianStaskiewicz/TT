@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProjectSubScreenController implements Initializable {
+public class ProjectSubScreenController extends AbstractSubScreenController{
 
     @Getter
     @Setter
@@ -51,6 +51,7 @@ public class ProjectSubScreenController implements Initializable {
         this.projectRequest = new ProjectRequest();
     }
 
+    @Override
     public void initializeData() {
         activeProjects.setDisable(Boolean.TRUE);
         List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
@@ -104,7 +105,14 @@ public class ProjectSubScreenController implements Initializable {
         newWindow.showAndWait();
 
         refreshSelectedProjectList();
+        mainScreenController.getContextHandler().setAvailableProjects(projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId()));
+        mainScreenController.getContextHandler().setCurrentProject(mainScreenController.getContextHandler().getAvailableProjects().get(mainScreenController.getContextHandler().getAvailableProjects().size() - 1));
+        mainScreenController.refreshProjectListAndSelectLastCreated();
+    }
 
+    @FXML
+    public void deleteProject() {
+        System.out.println("Deleting projects(" + projectView.getSelectedPositions().size()+")");
     }
 
     @FXML
@@ -178,5 +186,10 @@ public class ProjectSubScreenController implements Initializable {
         }
 
         projectView.setValue(projectUnits);
+    }
+
+    @Override
+    public void refreshData(){
+        System.out.println("REFRESH dla project subscreen'a");
     }
 }

@@ -131,6 +131,17 @@
     -fx-text-fill: rgb(32, 30, 30);
 }
 
+.labeled-button-dark {
+    -fx-text-fill: #393F48;
+
+    -fx-background-color: rgba(255, 255, 255, .0);
+    -fx-border-style: none;
+}
+
+.labeled-button-dark:hover {
+    -fx-text-fill: rgb(32, 30, 30);
+}
+
 .bold-button {
     -fx-font-weight: bold;
     -fx-font-size: 17px;

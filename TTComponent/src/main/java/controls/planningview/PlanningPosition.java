@@ -19,41 +19,42 @@ import java.io.IOException;
 
 @AllArgsConstructor
 public class PlanningPosition extends GridPane {
-    @FXML
-    @Getter
-    @Setter
-    private GridPane base;
+//    @FXML
+//    @Getter
+//    @Setter
+//    private GridPane base;
 
     @FXML
     @Getter
     @Setter
-    private CheckBox checkBox;
-
+    private CheckBox selector;
     @FXML
     @Getter
     @Setter
     private Button title;
-
     @FXML
     @Getter
     @Setter
     private Label person;
-
     @FXML
     @Getter
     @Setter
     private ProgressBar progress;
+    //TODO add other controls here (time ratio and priority)
+
+    @Getter
+    private PlanningViewPositionUnit unit;
 
     @Getter
     @Setter
-    private Boolean clicked;
-
+    private Boolean isSelected;
     @Getter
-    private PlanningUnit planningUnit;
+    @Setter
+    private Boolean isClicked;
 
     public PlanningPosition() {
-        this.clicked = Boolean.FALSE;
-
+        this.isSelected = Boolean.FALSE;
+        this.isClicked = Boolean.FALSE;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/PlanningPosition.fxml"));
         fxmlLoader.setRoot(this);
@@ -65,40 +66,61 @@ public class PlanningPosition extends GridPane {
         }
     }
 
-    public void setPlanningUnit(PlanningUnit planningUnit){
-        this.planningUnit = planningUnit;
 
-        checkBox.setSelected(planningUnit.getSelect()!=null? planningUnit.getSelect():Boolean.FALSE);
-        title.setText(planningUnit.getTitle());
-        person.setText(planningUnit.getPerson());
-        progress.progressProperty().setValue(planningUnit.getProgress());
+    public void setValue(PlanningViewPositionUnit value) {
+        this.unit = value;
+        this.isSelected = unit.getIsSelected() != null ? unit.getIsSelected() : Boolean.FALSE;
+
+        selector.setSelected(unit.getIsSelected() != null ? unit.getIsSelected() : Boolean.FALSE);
+        title.setText(unit.getTitle());
+        person.setText(unit.getPerson());
+        progress.progressProperty().setValue(unit.getProgress());
+        //TODO set other controls here (time ratio and priority)
     }
 
-    public void setSelected(){
-        planningUnit.setSelect(checkBox.isSelected());
+    public PlanningViewPositionUnit getValue() {
+        return this.unit;
     }
 
-    public void setClicked() {
-        clicked = Boolean.TRUE;
+
+    public void select() {
+        isSelected = Boolean.TRUE;
+        selector.setSelected(Boolean.TRUE);
     }
 
-    public void setSelected(Boolean select) {
-        checkBox.setSelected(select);
-        planningUnit.setSelect(select);
+    public void unselect() {
+        isSelected = Boolean.FALSE;
+        selector.setSelected(Boolean.FALSE);
     }
 
-    //TODO test
+    public void click() {
+        isClicked = Boolean.TRUE;
+        System.out.println("Test: " + unit.getId());
+    }
+
+    public void unclick() {
+        isClicked = Boolean.FALSE;
+    }
+
+    @FXML
+    public void onSelectorAction() {
+        isSelected = selector.isSelected();
+    }
+
+
+    //    DEFAULT PART - DO NOT CHANGE
     public final void setOnAction(EventHandler<ActionEvent> value) {
         EventHandler<ActionEvent> current = title.getOnAction();
         title.setOnAction(e -> {
-            current.handle(e);
-            //TODO ADD NULLCHECK
-            if(value!=null){
+            if (current != null) {
+                current.handle(e);
+            }
+
+            if (value != null) {
                 value.handle(e);
             }
         });
     }
-
 
     public final ObjectProperty<EventHandler<ActionEvent>> onActionProperty() {
         return onAction;
@@ -112,7 +134,7 @@ public class PlanningPosition extends GridPane {
 
         @Override
         public Object getBean() {
-            return PlanningPosition.this;//SwipeSelector.this;
+            return PlanningPosition.this;
         }
 
         @Override

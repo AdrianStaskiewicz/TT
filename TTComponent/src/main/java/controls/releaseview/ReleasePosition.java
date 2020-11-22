@@ -113,6 +113,16 @@ public class ReleasePosition extends GridPane {
         });
     }
 
+    //TODO test
+    public final void setOnSelect(EventHandler<ActionEvent> value) {
+        EventHandler<ActionEvent> current = checkBox.getOnAction();
+        checkBox.setOnAction(e -> {
+            current.handle(e);
+            //TODO ADD NULLCHECK
+            value.handle(e);
+        });
+    }
+
 
     public final ObjectProperty<EventHandler<ActionEvent>> onActionProperty() {
         return onAction;

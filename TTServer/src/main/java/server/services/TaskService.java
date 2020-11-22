@@ -13,6 +13,12 @@ public interface TaskService {
 
     List<TaskDto> getAllAssignedToReleaseByReleaseId(Long releaseId);
 
+    List<TaskDto> getAllTodoAssignedToReleaseByReleaseId(Long releaseId);
+
+    List<TaskDto> getAllBusyAssignedToReleaseByReleaseId(Long releaseId);
+
+    List<TaskDto> getAllDoneAssignedToReleaseByReleaseId(Long releaseId);
+
     Task save(Task task);
 
     List<Task> save(List<Task> tasks);

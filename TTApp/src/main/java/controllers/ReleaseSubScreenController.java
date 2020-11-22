@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ReleaseSubScreenController implements Initializable {
+public class ReleaseSubScreenController extends AbstractSubScreenController {
 
     @Getter
     @Setter
@@ -52,6 +52,7 @@ public class ReleaseSubScreenController implements Initializable {
         this.releaseRequest = new ReleaseRequest();
     }
 
+    @Override
     public void initializeData() {
         upcomingReleases.setDisable(Boolean.TRUE);
         List<ReleaseDto> releaseDtos = releaseRequest.getAllUpcomingAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
@@ -105,6 +106,11 @@ public class ReleaseSubScreenController implements Initializable {
         newWindow.showAndWait();
 
         refreshSelectedReleaseList();
+    }
+
+    @FXML
+    public void deleteRelease() {
+        System.out.println("Deleting releases(" + releaseView.getSelectedPositions().size()+")");
     }
 
     @FXML
@@ -178,5 +184,20 @@ public class ReleaseSubScreenController implements Initializable {
         }
 
         releaseView.setValue(projectUnits);
+    }
+
+
+    @Override
+    public void refreshData(){
+        if(upcomingReleases.isDisabled()){
+            getAllUpcomingReleases();
+        }else{
+            if(releasedReleases.isDisabled()){
+                getAllReleasedReleases();
+            }else{
+                getAllArchivedReleases();
+            }
+        }
+        System.out.println("REFRESH dla release subscreen'a");
     }
 }

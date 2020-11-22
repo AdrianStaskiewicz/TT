@@ -51,6 +51,41 @@ public class TaskRequest {
         return result;
     }
 
+    public List<TaskDto> getAllTodoAssignedToReleaseByReleaseId(Long releaseId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(releaseId, null);
+
+        ResponseEntity<List<TaskDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getalltodoassignedtorelease", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<TaskDto>>() {
+        });
+        List<TaskDto> result = response.getBody();
+
+        return result;
+    }
+
+    public List<TaskDto> getAllBusyAssignedToReleaseByReleaseId(Long releaseId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(releaseId, null);
+
+        ResponseEntity<List<TaskDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getallbusyassignedtorelease", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<TaskDto>>() {
+        });
+        List<TaskDto> result = response.getBody();
+
+        return result;
+    }
+
+    public List<TaskDto> getAllDoneAssignedToReleaseByReleaseId(Long releaseId){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpEntity<Long> requestUpdate = new HttpEntity<>(releaseId, null);
+
+        ResponseEntity<List<TaskDto>> response = restTemplate.exchange(Settings.URL + CATEGORY + "getalldoneassignedtorelease", HttpMethod.POST, requestUpdate, new ParameterizedTypeReference<List<TaskDto>>() {
+        });
+        List<TaskDto> result = response.getBody();
+
+        return result;
+    }
     //TODO EXTRA METHODS HERE
 
 //    public List<TaskDto> findAllByFarmId(Long farmId) {

@@ -1,6 +1,7 @@
-package controls.projectview;
+package controls.card;
 
 import controls.dateview.DateView;
+import controls.projectview.ProjectUnit;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
@@ -14,12 +15,11 @@ import javafx.scene.layout.GridPane;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import utils.DateUtil;
 
 import java.io.IOException;
 
 @AllArgsConstructor
-public class ProjectPosition extends GridPane {
+public class Card extends GridPane {
 
     @FXML
     @Getter
@@ -31,26 +31,6 @@ public class ProjectPosition extends GridPane {
     @Setter
     private Button title;
 
-    @FXML
-    @Getter
-    @Setter
-    private DateView startDate;
-
-    @FXML
-    @Getter
-    @Setter
-    private DateView endDate;
-
-    @FXML
-    @Getter
-    @Setter
-    private Label company;
-
-    @FXML
-    @Getter
-    @Setter
-    private Label description;
-
     @Getter
     @Setter
     private Boolean clicked;
@@ -58,13 +38,13 @@ public class ProjectPosition extends GridPane {
     @Getter
     private ProjectUnit projectUnit;
 
-    public ProjectPosition() {
+    public Card() {
         this.clicked = Boolean.FALSE;
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ProjectPosition.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
@@ -73,21 +53,21 @@ public class ProjectPosition extends GridPane {
     }
 
     public void setProjectUnit(ProjectUnit projectUnit) {
-        this.projectUnit = projectUnit;
-
-        checkBox.setSelected(projectUnit.getSelect() != null ? projectUnit.getSelect() : Boolean.FALSE);
-        title.setText(projectUnit.getTitle());
-        //TODO ADD NULLCHECK
-//        startDate.setText(projectUnit.getStartDate().toString());
-//        endDate.setText(projectUnit.getEndDate().toString());
-        company.setText(projectUnit.getCompany());
-        description.setText(projectUnit.getDescription());
-        if(projectUnit.getStartDate() != null){
-            startDate.setValue(projectUnit.getStartDate());
-        }
-        if(projectUnit.getEndDate() != null){
-            endDate.setValue(projectUnit.getEndDate());
-        }
+//        this.projectUnit = projectUnit;
+//
+//        checkBox.setSelected(projectUnit.getSelect() != null ? projectUnit.getSelect() : Boolean.FALSE);
+//        title.setText(projectUnit.getTitle());
+//        //TODO ADD NULLCHECK
+////        startDate.setText(projectUnit.getStartDate().toString());
+////        endDate.setText(projectUnit.getEndDate().toString());
+//        company.setText(projectUnit.getCompany());
+//        description.setText(projectUnit.getDescription());
+//        if(projectUnit.getStartDate() != null){
+//            startDate.setValue(projectUnit.getStartDate());
+//        }
+//        if(projectUnit.getEndDate() != null){
+//            endDate.setValue(projectUnit.getEndDate());
+//        }
 
     }
 
@@ -137,7 +117,7 @@ public class ProjectPosition extends GridPane {
 
         @Override
         public Object getBean() {
-            return ProjectPosition.this;//SwipeSelector.this;
+            return Card.this;//SwipeSelector.this;
         }
 
         @Override

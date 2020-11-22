@@ -1,5 +1,8 @@
 package controls.releaseview;
 
+import controls.projectview.ProjectPosition;
+import controls.projectview.ProjectUnit;
+import controls.projectview.ProjectView;
 import controls.releaseview.ReleasePosition;
 import controls.releaseview.ReleaseUnit;
 import javafx.beans.property.ObjectProperty;
@@ -129,6 +132,38 @@ public class ReleaseView extends AnchorPane {
         }
     };
 
+    public final ObjectProperty<EventHandler<ActionEvent>> onDeleteProperty() {
+        return onDelete;
+    }
+
+    public final void setOnDelete(EventHandler<ActionEvent> value) {
+//        onActionProperty().set(value);
+//        testEvent = value;//TODO test
+//        System.out.println("LOl");
+        delete.setOnAction(value);
+    }
+
+    public final EventHandler<ActionEvent> getOnDelete() {
+        return onDeleteProperty().get();
+    }
+
+    private ObjectProperty<EventHandler<ActionEvent>> onDelete = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+        @Override
+        protected void invalidated() {
+            setEventHandler(ActionEvent.ACTION, get());
+        }
+
+        @Override
+        public Object getBean() {
+            return ReleaseView.this;//SwipeSelector.this;
+        }
+
+        @Override
+        public String getName() {
+            return "onDelete";
+        }
+    };
+
 //    public String getText() {
 //        return textProperty().get();
 //    }
@@ -158,6 +193,16 @@ public class ReleaseView extends AnchorPane {
         return null;
     }
 
+    public List<ReleaseUnit> getSelectedPositions() {
+        List<ReleaseUnit> result = new ArrayList<>();
+        for (ReleasePosition position : releasePositions) {
+            if (position.getCheckBox().isSelected()) {
+                result.add(position.getReleaseUnit());
+            }
+        }
+        return result;
+    }
+
     public void setValue(List<ReleaseUnit> releaseUnits) {
 //        if(releaseUnits.size()>0){
             releasePane.getChildren().clear();
@@ -168,6 +213,13 @@ public class ReleaseView extends AnchorPane {
 
                 releasePosition.setReleaseUnit(releaseUnit);
                 releasePosition.setOnAction(testEvent);//TODO test
+                releasePosition.setOnSelect(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        delete.setDisable(Boolean.FALSE);
+                        System.out.println("Test ReleaseView: " + releasePosition);
+                    }
+                });
 
                 releasePositions.add(releasePosition);
 

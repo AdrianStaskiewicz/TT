@@ -79,3 +79,7 @@
     /*-fx-background-color: green;*/
     /*-fx-background-radius: 5em;*/
 /*}*/
+
+.scroll-pane-transparent > .viewport {
+    -fx-background-color: rgb(224,230,236);
+}

@@ -64,9 +64,13 @@ public class ReleaseDto {
     }
 
     public String getReleaseNumberToString(){
-        return this.majorNumber.toString()+"."
-                +this.minorNumber.toString()+"."
-                +this.releaseNumber.toString()+"."
-                +this.buildNumber.toString();
+        if(this.majorNumber!=null&&this.minorNumber!=null&&this.releaseNumber!=null&&this.buildNumber!=null){
+            return this.majorNumber.toString()+"."
+                    +this.minorNumber.toString()+"."
+                    +this.releaseNumber.toString()+"."
+                    +this.buildNumber.toString();
+        }
+
+        return "";
     }
 }

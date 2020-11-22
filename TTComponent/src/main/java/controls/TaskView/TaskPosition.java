@@ -26,7 +26,7 @@ public class TaskPosition extends GridPane {
     @FXML
     @Getter
     @Setter
-    private Button description;
+    private Button title;
 
     @FXML
     @Getter
@@ -48,7 +48,6 @@ public class TaskPosition extends GridPane {
     public TaskPosition() {
         this.clicked = Boolean.FALSE;
 
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/TaskPosition.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -62,34 +61,33 @@ public class TaskPosition extends GridPane {
     public void setTaskUnit(TaskUnit taskUnit){
         this.taskUnit = taskUnit;
 
-        description.setText(taskUnit.getDescription());
+        title.setText(taskUnit.getTitle());
         person.setText(taskUnit.getPerson());
         progress.progressProperty().setValue(taskUnit.getProgress());
     }
-
-//    public void setSelected(){
-//        taskUnit.setSelect(checkBox.isSelected());
-//    }
 
     public void setClicked() {
         clicked = Boolean.TRUE;
     }
 
-//    public void setSelected(Boolean select) {
-//        checkBox.setSelected(select);
-//        planningUnit.setSelect(select);
-//    }
 
-    //TODO test
+
+
+
+
+
+
+
+
     public final void setOnAction(EventHandler<ActionEvent> value) {
-        EventHandler<ActionEvent> current = description.getOnAction();
-        description.setOnAction(e -> {
+        EventHandler<ActionEvent> current = title.getOnAction();
+        title.setOnAction(e -> {
             current.handle(e);
-            //TODO NULLCHECK
-            value.handle(e);
+            if(value!=null){
+                value.handle(e);
+            }
         });
     }
-
 
     public final ObjectProperty<EventHandler<ActionEvent>> onActionProperty() {
         return onAction;
@@ -103,7 +101,7 @@ public class TaskPosition extends GridPane {
 
         @Override
         public Object getBean() {
-            return TaskPosition.this;//SwipeSelector.this;
+            return TaskPosition.this;
         }
 
         @Override

@@ -3,6 +3,7 @@ package controls.projectview;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,13 +70,13 @@ public class ProjectView extends AnchorPane {
 
     private ObjectProperty<EventHandler<ActionEvent>> onAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
         @Override
-        protected void invalidated() {
-            setEventHandler(ActionEvent.ACTION, get());
+        public Object getBean() {
+            return ProjectView.this;//SwipeSelector.this;
         }
 
         @Override
-        public Object getBean() {
-            return ProjectView.this;//SwipeSelector.this;
+        protected void invalidated() {
+            setEventHandler(ActionEvent.ACTION, get());
         }
 
         @Override
@@ -117,6 +118,39 @@ public class ProjectView extends AnchorPane {
         }
     };
 
+
+    public final ObjectProperty<EventHandler<ActionEvent>> onDeleteProperty() {
+        return onDelete;
+    }
+
+    public final void setOnDelete(EventHandler<ActionEvent> value) {
+//        onActionProperty().set(value);
+//        testEvent = value;//TODO test
+//        System.out.println("LOl");
+        delete.setOnAction(value);
+    }
+
+    public final EventHandler<ActionEvent> getOnDelete() {
+        return onDeleteProperty().get();
+    }
+
+    private ObjectProperty<EventHandler<ActionEvent>> onDelete = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+        @Override
+        protected void invalidated() {
+            setEventHandler(ActionEvent.ACTION, get());
+        }
+
+        @Override
+        public Object getBean() {
+            return ProjectView.this;//SwipeSelector.this;
+        }
+
+        @Override
+        public String getName() {
+            return "onDelete";
+        }
+    };
+
 //    public String getText() {
 //        return textProperty().get();
 //    }
@@ -146,6 +180,16 @@ public class ProjectView extends AnchorPane {
         return null;
     }
 
+    public List<ProjectUnit> getSelectedPositions() {
+        List<ProjectUnit> result = new ArrayList<>();
+        for (ProjectPosition position : projectPositions) {
+            if (position.getCheckBox().isSelected()) {
+                result.add(position.getProjectUnit());
+            }
+        }
+        return result;
+    }
+
     public void setValue(List<ProjectUnit> projectUnits) {
         projectPane.getChildren().clear();
         projectPositions = new ArrayList<>();
@@ -154,7 +198,15 @@ public class ProjectView extends AnchorPane {
             ProjectPosition projectPosition = new ProjectPosition();
 
             projectPosition.setProjectUnit(projectUnit);
+
             projectPosition.setOnAction(testEvent);//TODO test
+            projectPosition.setOnSelect(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    delete.setDisable(Boolean.FALSE);
+                    System.out.println("Test ProjectView: " + projectPosition);
+                }
+            });
 
             projectPositions.add(projectPosition);
 

@@ -1,6 +1,5 @@
-package controls.TaskView;
+package controls.taskview;
 
-import controls.TaskPosition;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
@@ -20,17 +19,14 @@ public class TaskView extends AnchorPane {
     @FXML
     private GridPane taskPositionsPane;
 
-    //    @FXML
     private List<TaskPosition> taskPositions;
-//
-//    private PlanningPosition planningPosition;
 
     private EventHandler<ActionEvent> testEvent;//TODO test
 
     public TaskView() {
         this.taskPositions = new ArrayList<>();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/controls/TaskView/TaskView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/TaskView.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -40,6 +36,20 @@ public class TaskView extends AnchorPane {
             throw new RuntimeException(exception);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public final ObjectProperty<EventHandler<ActionEvent>> onActionProperty() {
         return onAction;
@@ -114,5 +124,11 @@ public class TaskView extends AnchorPane {
         }
 
         taskPositionsPane.add(vbox, 0, 1);
+    }
+
+    public void clearValue(){
+        taskPositions = new ArrayList<>();
+
+        taskPositionsPane.getChildren().remove(0,1);
     }
 }

@@ -39,7 +39,7 @@
                 <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button fx:id="description" alignment="TOP_LEFT" onAction="#setClicked" style="-fx-background-color: transparent;" text="To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian" wrapText="true">
+                <Button fx:id="title" alignment="TOP_LEFT" onAction="#setClicked" style="-fx-background-color: transparent;" text="To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian To jest testowy opis w celu przetestowania czy powyzszy tekst zostanie zawiniety zgodnie z oczekiwaniami po wprowadzeniu zmian" wrapText="true">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

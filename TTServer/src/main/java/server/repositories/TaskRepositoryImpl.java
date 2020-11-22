@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import dtos.TaskDto;
 import entities.QTask;
 import entities.Task;
+import enums.TaskStatus;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -22,10 +23,10 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
 
         QTask task = QTask.task;
 
-        TaskDto result = (TaskDto) query.select(task)
+        TaskDto result = (TaskDto) query.select(Projections.constructor(TaskDto.class, task.task))
                 .from(task)
                 .where(task.id.eq(taskId))
-                .fetch();
+                .fetchOne();
 
         return result;
     }
@@ -65,6 +66,45 @@ public class TaskRepositoryImpl implements TaskRepositoryCustom {
         return query.select(Projections.constructor(TaskDto.class,task.task))
                 .from(task)
                 .where(task.release.id.eq(releaseId))
+                .fetch();
+    }
+
+    @Override
+    public List<TaskDto> getAllTodoAssignedToReleaseByReleaseId(Long releaseId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(Projections.constructor(TaskDto.class,task.task))
+                .from(task)
+                .where(task.release.id.eq(releaseId)
+                        .and(task.status.eq(TaskStatus.NEW)))
+                .fetch();
+    }
+
+    @Override
+    public List<TaskDto> getAllBusyAssignedToReleaseByReleaseId(Long releaseId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(Projections.constructor(TaskDto.class,task.task))
+                .from(task)
+                .where(task.release.id.eq(releaseId)
+                        .and(task.status.eq(TaskStatus.OPEN)))
+                .fetch();
+    }
+
+    @Override
+    public List<TaskDto> getAllDoneAssignedToReleaseByReleaseId(Long releaseId){
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        QTask task = QTask.task;
+
+        return query.select(Projections.constructor(TaskDto.class,task.task))
+                .from(task)
+                .where(task.release.id.eq(releaseId)
+                .and(task.status.eq(TaskStatus.CLOSED)))
                 .fetch();
     }
 

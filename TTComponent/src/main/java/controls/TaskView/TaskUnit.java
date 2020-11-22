@@ -1,4 +1,4 @@
-package controls.planningview;
+package controls.taskview;
 
 import lombok.*;
 
@@ -7,15 +7,14 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlanningUnit {
+public class TaskUnit {
 
     private Long id;
-    private Boolean select;
     private String title;
     private String person;
     private Double progress;
 
     public String toString(){
-        return select + " " + title + " " + person + " " +progress;
+        return title + " " + person + " " +progress;
     }
 }

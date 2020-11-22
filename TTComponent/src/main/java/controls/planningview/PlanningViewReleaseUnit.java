@@ -7,15 +7,14 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlanningUnit {
+public class PlanningViewReleaseUnit {
 
     private Long id;
-    private Boolean select;
     private String title;
-    private String person;
-    private Double progress;
+
+    //TODO add other values here (release date, spend and estimated time)
 
     public String toString(){
-        return select + " " + title + " " + person + " " +progress;
+        return title;
     }
 }

@@ -1,21 +1,22 @@
 package controllers;
 
-import controls.planningview.PlanningUnit;
 import controls.planningview.PlanningView;
 import converters.PlanningConverter;
 import dtos.ReleaseDto;
 import dtos.TaskDto;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
 import requests.ReleaseRequest;
 import requests.TaskRequest;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,23 +33,15 @@ public class PlanningSubScreenController implements Initializable {
     @FXML
     private Button all;
     @FXML
-    private VBox backlogPane;
-    @FXML
-    private VBox releasePane;
+    private PlanningView planningView;
 
     private TaskRequest taskRequest;
     private ReleaseRequest releaseRequest;
 
-    private PlanningView backlog;
-
-    private List<PlanningView> releases;
-
-    private List<ReleaseDto> releaseDtos;
-
 
     @FXML
     public void createTask() {
-
+        goToCreateTaskScreen();
     }
 
     @FXML
@@ -76,50 +69,94 @@ public class PlanningSubScreenController implements Initializable {
         this.releaseRequest = new ReleaseRequest();
 
         all.setDisable(Boolean.TRUE);
-        backlog = new PlanningView();
-        backlogPane.getChildren().add(backlog);
 
-//        //TODO TEST!
-//        List<PlanningUnit> planningUnits = new LinkedList<>();
-//        planningUnits.add(PlanningUnit.builder().description("Napisz swoj wlasny modul").person("Anna Nowak").progress(0.7).build());
-//        planningUnits.add(PlanningUnit.builder().description("Przetestuj modul").person("Jan Kowalski").progress(0.9).build());
-//        planningUnits.add(PlanningUnit.builder().description("Synchronizing different computers within a local network").person("Jan Kowal").progress(0.3).build());
-//        planningUnits.add(PlanningUnit.builder().description("Test").person("Jan Kowal").progress(0.3).build());
-        backlog.setHeader("Product backlog");//TODO change to setting whole pack
+//        backlog = new PlanningRelease();
+//        backlog.setValue();
+//        backlogPane.getChildren().add(backlog);//TODO change
+//        backlog.setHeader("Product backlog");//TODO change to setting whole pack
+
 //        backlog.setValue(planningUnits);
 //        //TODO CHANGE TO CREATING NEW ONE ONLY WHEN YOU GOT SOME DATA FROM REPO FOR ODER RELEASE THAN BACKLOG
-//        releasePane.getChildren().add(new PlanningView());//TODO for a moment
-//        releasePane.getChildren().add(new PlanningView());//TODO for a moment
+//        releasePane.getChildren().add(new PlanningRelease());//TODO for a moment
+//        releasePane.getChildren().add(new PlanningRelease());//TODO for a moment
     }
 
     public void initializeData() {
-        List<TaskDto> taskDtos = taskRequest.getAllProductBacklogByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
+        List<TaskDto> taskDtos = new ArrayList<>();
 
-        List<PlanningUnit> planningUnits = new LinkedList<>();
+        ReleaseDto backlog = new ReleaseDto();
+        backlog.setName("Backlog");
+        taskDtos = taskRequest.getAllProductBacklogByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
 
-        for (TaskDto taskDto : taskDtos) {
-            planningUnits.add(PlanningConverter.dtoToUnit(taskDto));
-        }
+        planningView.setLeftSideValue(PlanningConverter.dtosToUnit(backlog, taskDtos));
 
-        backlog.setValue(planningUnits);
+        List<ReleaseDto> releases = new ArrayList<>();
+        releases = releaseRequest.getAllUpcomingAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
 
-        releaseDtos = releaseRequest.getAllUpcomingAssignedToProjectByProjectId(mainScreenController.getContextHandler().getCurrentProject().getId());
-
-        PlanningView planningView;
-        for (ReleaseDto releaseDto : releaseDtos) {
-            planningView = new PlanningView();
-            planningView.setHeader(releaseDto.getReleaseNumberToString() + " " + releaseDto.getName());
+        for (ReleaseDto releaseDto : releases) {
             taskDtos = taskRequest.getAllAssignedToReleaseByReleaseId(releaseDto.getId());
-            planningUnits = new LinkedList<>();
-            for (TaskDto taskDto : taskDtos) {
-                planningUnits.add(PlanningConverter.dtoToUnit(taskDto));
-            }
-            planningView.setValue(planningUnits);
-//            planningView.setOnAction(this::goToTaskDetailView);
-            releasePane.getChildren().add(planningView);
-//            releases.add(planningView);
+
+            planningView.setRightSideValue(PlanningConverter.dtosToUnit(releaseDto, taskDtos));
         }
 
+    }
+
+    public void goToCreateTaskScreen() {
+        mainScreenController.enableAllButtons();
+
+        FXMLLoader innerLoader = new FXMLLoader();
+        innerLoader.setLocation(this.getClass().getResource("/views/CreateTaskSubScreen.fxml"));
+//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
+//        innerLoader.setResources(bundle);
+
+        GridPane gridPane = null;
+        try {
+            gridPane = innerLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        CreateTaskSubScreenController controller = innerLoader.getController();
+        controller.setMainScreenController(mainScreenController);
+        controller.initializeData();
+//        set objects here
+
+        mainScreenController.setView(gridPane);
+    }
+
+    public void goToTaskDetailScreenWithDataInitialization(Long taskId) {
+        mainScreenController.enableAllButtons();
+
+        FXMLLoader innerLoader = new FXMLLoader();
+        innerLoader.setLocation(this.getClass().getResource("/views/TaskDetailSubScreen2.fxml"));
+//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
+//        innerLoader.setResources(bundle);
+
+        GridPane gridPane = null;
+        try {
+            gridPane = innerLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TaskDetailSubScreenController controller = innerLoader.getController();
+        //TODO set main screen controller here
+        controller.initializeData(taskId);
+        controller.setMainScreenController(mainScreenController);
+//        controller.initializeData();
+//        set objects here
+
+        mainScreenController.setView(gridPane);
+    }
+
+    @FXML
+    public void goToDetailReleaseScreen() {
+        System.out.println(planningView.getReleaseValue());
+    }
+
+    @FXML
+    public void goToDetailTaskScreen() {
+        goToTaskDetailScreenWithDataInitialization(planningView.getPositionValue());
     }
 
     private void enableAllButtons() {
@@ -128,7 +165,4 @@ public class PlanningSubScreenController implements Initializable {
         all.setDisable(Boolean.FALSE);
     }
 
-    private void goToTaskDetailView(){
-        System.out.println("going to detail view for current task");
-    }
 }

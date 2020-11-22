@@ -6,11 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,23 +19,31 @@ import java.util.List;
 public class PlanningView extends AnchorPane {
 
     @FXML
-    private Label title;//TODO change to button
-    @FXML
-    private Button checkAll;
-    @FXML
-    private Button uncheckAll;
-    @FXML
-    private GridPane planningPositionsPane;
+    private Label counter;//TODO change to button??
 
-    //    @FXML
-    private List<PlanningPosition> planningPositions;
-//
-//    private PlanningPosition planningPosition;
+    @FXML
+    private ScrollPane leftSide;
+    @FXML
+    private VBox leftPane;
+    @FXML
+    private ScrollPane rightSide;
+    @FXML
+    private VBox rightPane;
 
-    private EventHandler<ActionEvent> testEvent;//TODO test
+    private List<PlanningRelease> leftSidePlanningReleases;
+    private List<PlanningRelease> rightSidePlanningReleases;
+
+    private EventHandler<ActionEvent> releaseEvent;//TODO test
+    private EventHandler<ActionEvent> positionEvent;//TODO test
+
+    @Getter
+    private Long releaseValue;
+    @Getter
+    private Long positionValue;
 
     public PlanningView() {
-        this.planningPositions = new ArrayList<>();
+        this.leftSidePlanningReleases = new ArrayList<>();
+        this.rightSidePlanningReleases = new ArrayList<>();
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/PlanningView.fxml"));
         fxmlLoader.setRoot(this);
@@ -48,20 +56,177 @@ public class PlanningView extends AnchorPane {
         }
     }
 
-    public final ObjectProperty<EventHandler<ActionEvent>> onActionProperty() {
-        return onAction;
+    public void setLeftSideValue(PlanningViewUnit value) {
+        PlanningRelease planningRelease = new PlanningRelease();
+        planningRelease.setValue(value.getRelease());
+
+        planningRelease.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if (planningRelease.getUnit() != null) {
+                    releaseValue = planningRelease.getUnit().getId();
+                }
+            }
+        });
+        planningRelease.setOnAction(releaseEvent);
+
+        planningRelease.setOnPositionAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                positionValue = planningRelease.getPositionValue();
+            }
+        });
+
+        planningRelease.setOnPositionAction(positionEvent);
+
+        planningRelease.setPositions(value.getPositions());
+
+        leftSidePlanningReleases.add(planningRelease);
+        leftPane.getChildren().add(planningRelease);
     }
 
-    public final void setOnAction(EventHandler<ActionEvent> value) {
+    public void setLeftSideValue(List<PlanningRelease> planningReleases) {
+
+    }
+
+    public void setRightSideValue(PlanningViewUnit value) {
+        PlanningRelease planningRelease = new PlanningRelease();
+        planningRelease.setValue(value.getRelease());
+
+        planningRelease.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                if (planningRelease.getUnit() != null) {
+                    releaseValue = planningRelease.getUnit().getId();
+                }
+            }
+        });
+        planningRelease.setOnAction(releaseEvent);
+
+        planningRelease.setOnPositionAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                positionValue = planningRelease.getPositionValue();
+            }
+        });
+
+        planningRelease.setOnPositionAction(positionEvent);//TODO AS1 problem fix a
+
+        planningRelease.setPositions(value.getPositions());
+
+        rightSidePlanningReleases.add(planningRelease);
+        rightPane.getChildren().add(planningRelease);
+    }
+
+    public void setRightSideValue(List<PlanningRelease> planningReleases) {
+
+    }
+
+    public void removeAllLeftSideValues() {
+
+    }
+
+    public void removeAllRightSideValues() {
+
+    }
+
+    public Long getClickedRelease() {
+//        for (PlanningPosition position : planningPositions) {
+//            if (position.getIsClicked()) {
+//                position.setIsClicked(Boolean.FALSE);
+//                return position.getPlanningUnit();
+//            }
+//        }
+//        return null;
+
+        return releaseValue;
+    }
+
+    public Long getClickedPosition() {
+//        for (PlanningPosition position : planningPositions) {
+//            if (position.getIsClicked()) {
+//                position.setIsClicked(Boolean.FALSE);
+//                return position.getPlanningUnit();
+//            }
+//        }
+//        return null;
+        return 0L;
+    }
+
+
+    public Long getValue() {
+//        for(PlanningRelease planningRelease : leftSidePlanningReleases){
+//            if(planningRelease.getClickedPosition()!=null){
+//                value = planningRelease.getClickedPosition().getId();
+//            }
+//        }
+//
+//        if(value!=null){
+//            return value;
+//        }else{
+//            for(PlanningRelease planningRelease : rightSidePlanningReleases){
+//                if(planningRelease.getClickedPosition()!=null){
+//                    value = planningRelease.getClickedPosition().getId();
+//                }
+//            }
+//        }
+//
+//        return this.value;
+
+        return 12L;
+    }
+
+//    public void setValue(Long value) {
+//        this.value = value;
+//    }//
+
+
+    //FOR RELEASE ACTION
+    public final ObjectProperty<EventHandler<ActionEvent>> onReleaseActionProperty() {
+        return onReleaseAction;
+    }
+
+    public final void setOnReleaseAction(EventHandler<ActionEvent> value) {
 //        onActionProperty().set(value);
-        testEvent = value;//TODO test
+        releaseEvent = value;//TODO test
     }
 
-    public final EventHandler<ActionEvent> getOnAction() {
-        return onActionProperty().get();
+    public final EventHandler<ActionEvent> getOnReleaseAction() {
+        return onReleaseActionProperty().get();
     }
 
-    private ObjectProperty<EventHandler<ActionEvent>> onAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+    private ObjectProperty<EventHandler<ActionEvent>> onReleaseAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
+        @Override
+        protected void invalidated() {
+            setEventHandler(ActionEvent.ACTION, get());
+        }
+
+        @Override
+        public Object getBean() {
+            return PlanningView.this;
+        }
+
+        @Override
+        public String getName() {
+            return "onReleaseAction";
+        }
+    };
+
+    //FOR POSITIONS ACTION
+    public final ObjectProperty<EventHandler<ActionEvent>> onPositionActionProperty() {
+        return onPositionAction;
+    }
+
+    public final void setOnPositionAction(EventHandler<ActionEvent> value) {
+//        onActionProperty().set(value);
+       positionEvent = value;//TODO test
+    }
+
+    public final EventHandler<ActionEvent> getOnPositionAction() {
+        return onPositionActionProperty().get();
+    }
+
+    private ObjectProperty<EventHandler<ActionEvent>> onPositionAction = new ObjectPropertyBase<EventHandler<ActionEvent>>() {
         @Override
         protected void invalidated() {
             setEventHandler(ActionEvent.ACTION, get());
@@ -74,70 +239,8 @@ public class PlanningView extends AnchorPane {
 
         @Override
         public String getName() {
-            return "onAction";
+            return "onPositionAction";
         }
     };
 
-//    public String getText() {
-//        return textProperty().get();
-//    }
-//
-//    public void setText(String value) {
-//        textProperty().set(value);
-//    }
-
-//    public StringProperty textProperty() {
-//        return textField.textProperty();
-//    }
-
-//    @FXML
-//    protected void doSomething() {
-//        value = String.valueOf(textField.getText().length());
-//        System.out.println("The button was clicked!");
-//    }
-
-
-    public PlanningUnit getClickedPosition() {
-        for (PlanningPosition position : planningPositions) {
-            if (position.getClicked()) {
-                position.setClicked(Boolean.FALSE);
-                return position.getPlanningUnit();
-            }
-        }
-        return null;
-    }
-
-    public void setHeader(String header){//TODO change to header set
-        title.setText(header);
-    }
-
-    public void setValue(List<PlanningUnit> planningUnits) {
-        VBox vbox = new VBox();
-        for (PlanningUnit planningUnit : planningUnits) {
-            PlanningPosition planningPosition = new PlanningPosition();
-
-            planningPosition.setPlanningUnit(planningUnit);
-            planningPosition.setOnAction(testEvent);//TODO test
-
-            planningPositions.add(planningPosition);
-
-            vbox.getChildren().add(planningPosition);
-        }
-
-        planningPositionsPane.add(vbox, 0, 1);
-    }
-
-    @FXML
-    protected void checkAll() {
-        for (PlanningPosition position : planningPositions) {
-            position.setSelected(Boolean.TRUE);
-        }
-    }
-
-    @FXML
-    protected void uncheckAll() {
-        for (PlanningPosition position : planningPositions) {
-            position.setSelected(Boolean.FALSE);
-        }
-    }
 }
