@@ -1,10 +1,5 @@
 package controls.releaseview;
 
-import controls.projectview.ProjectPosition;
-import controls.projectview.ProjectUnit;
-import controls.projectview.ProjectView;
-import controls.releaseview.ReleasePosition;
-import controls.releaseview.ReleaseUnit;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
@@ -15,10 +10,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

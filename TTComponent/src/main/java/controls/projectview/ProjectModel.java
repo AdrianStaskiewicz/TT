@@ -1,5 +1,6 @@
 package controls.projectview;
 
+import controls.card.CardModel;
 import lombok.*;
 
 import java.util.Date;
@@ -9,17 +10,14 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectUnit {
+public class ProjectModel extends CardModel {
 
-    private int id;
-    private Boolean select;
-    private String title;
     private Date startDate;
     private Date endDate;
     private String description;
     private String company;
 
     public String toString(){
-        return select + " " + title+" "+description + " " + company;
+        return selected + " " + header+" "+description + " " + company;
     }
 }

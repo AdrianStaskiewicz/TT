@@ -2,6 +2,7 @@ package controllers;
 
 import controls.card.Card;
 import controls.card.CardContainer;
+import controls.card.CardModel;
 import controls.releaseview.ReleaseUnit;
 import controls.releaseview.ReleaseView;
 import converters.ReleaseConverter;
@@ -41,7 +42,7 @@ public class TestSubScreenController extends AbstractSubScreenController {
     @FXML
     private Button archivedReleases;
     @FXML
-    private CardContainer<Card> cardContainer;
+    private CardContainer<Card, CardModel> cardContainer;
 
     private ReleaseRequest releaseRequest;
 

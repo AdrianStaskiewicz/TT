@@ -12,11 +12,13 @@ import java.util.Date;
 public class ReleaseUnit {
 
     private int id;
-    private Boolean select;
     private String number;
+
     private String name;
     private Date date;
     private String focus;
+
+    private Boolean select;
 
     public String toString(){
         return select + " " + number+" "+name + " " + focus;

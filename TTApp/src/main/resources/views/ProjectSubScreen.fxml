@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import controls.projectview.ProjectView?>
+<?import controls.projectview.ProjectCardContainer?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.Image?>
@@ -127,7 +127,7 @@
                                         </Button>
                                     </children>
                                 </VBox>
-                                <ProjectView fx:id="projectView" onAdd="#addProject" onDelete="#deleteProject"/>
+                                <ProjectCardContainer fx:id="projectCardContainer" onAdd="#addProject" onDelete="#deleteProject"/>
                             </children>
                         </GridPane>
                     </children>

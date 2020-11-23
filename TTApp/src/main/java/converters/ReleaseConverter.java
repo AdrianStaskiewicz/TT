@@ -1,8 +1,6 @@
 package converters;
 
-import controls.projectview.ProjectUnit;
 import controls.releaseview.ReleaseUnit;
-import dtos.ProjectDto;
 import dtos.ReleaseDto;
 
 public class ReleaseConverter {

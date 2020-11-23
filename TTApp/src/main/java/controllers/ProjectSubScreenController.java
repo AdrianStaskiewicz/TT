@@ -1,12 +1,12 @@
 package controllers;
 
-import controls.projectview.ProjectUnit;
-import controls.projectview.ProjectView;
+import controls.projectview.ProjectCardContainer;
+import controls.projectview.ProjectModel;
 import converters.ProjectConverter;
 import dtos.ProjectDto;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,7 +37,7 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
     @FXML
     private Button endedProjects;
     @FXML
-    private ProjectView projectView;
+    private ProjectCardContainer projectCardContainer;
 
     private ProjectRequest projectRequest;
 
@@ -56,13 +56,13 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
         activeProjects.setDisable(Boolean.TRUE);
         List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
-        List<ProjectUnit> projectUnits = new LinkedList<>();
+        List<ProjectModel> projectModels = new LinkedList<>();
 
         for (ProjectDto projectDto : projectDtos) {
-            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
+            projectModels.add(ProjectConverter.dtoToUnit(projectDto));
         }
 
-        projectView.setValue(projectUnits);
+        projectCardContainer.setValues(FXCollections.observableList(projectModels));
     }
 
     @FXML
@@ -92,7 +92,7 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
         popupScene.setFill(Color.TRANSPARENT);
 
 //       this.stage.getScene();
-        newWindow.initOwner(projectView.getScene().getWindow());
+        newWindow.initOwner(projectCardContainer.getScene().getWindow());
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.setScene(popupScene);
         newWindow.setResizable(false);
@@ -112,7 +112,7 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
 
     @FXML
     public void deleteProject() {
-        System.out.println("Deleting projects(" + projectView.getSelectedPositions().size()+")");
+        System.out.println("Deleting projects(" + projectCardContainer.getSelectedCards().size()+")");
     }
 
     @FXML
@@ -155,37 +155,37 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
     private void getAllActiveProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
-        List<ProjectUnit> projectUnits = new LinkedList<>();
+        List<ProjectModel> projectModels = new LinkedList<>();
 
         for (ProjectDto projectDto : projectDtos) {
-            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
+            projectModels.add(ProjectConverter.dtoToUnit(projectDto));
         }
 
-        projectView.setValue(projectUnits);
+        projectCardContainer.setValues(FXCollections.observableList(projectModels));
     }
 
     private void getAllUpcomingProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllUpcomingAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
-        List<ProjectUnit> projectUnits = new LinkedList<>();
+        List<ProjectModel> projectModels = new LinkedList<>();
 
         for (ProjectDto projectDto : projectDtos) {
-            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
+            projectModels.add(ProjectConverter.dtoToUnit(projectDto));
         }
 
-        projectView.setValue(projectUnits);
+        projectCardContainer.setValues(FXCollections.observableList(projectModels));
     }
 
     private void getAllEndedProjects() {
         List<ProjectDto> projectDtos = projectRequest.getAllEndedAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId());
 
-        List<ProjectUnit> projectUnits = new LinkedList<>();
+        List<ProjectModel> projectModels = new LinkedList<>();
 
         for (ProjectDto projectDto : projectDtos) {
-            projectUnits.add(ProjectConverter.dtoToUnit(projectDto));
+            projectModels.add(ProjectConverter.dtoToUnit(projectDto));
         }
 
-        projectView.setValue(projectUnits);
+        projectCardContainer.setValues(FXCollections.observableList(projectModels));
     }
 
     @Override

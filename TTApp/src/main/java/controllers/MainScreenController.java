@@ -2,8 +2,6 @@ package controllers;
 
 import context.ContextHandler;
 import dtos.ProjectDto;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,12 +13,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
-import requests.UserRequest;
 import requests.ProjectRequest;
+import requests.UserRequest;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainScreenController implements Initializable {
@@ -306,6 +303,8 @@ public class MainScreenController implements Initializable {
     }
 
     private void refreshDataOnSubScreen(){
-        contextHandler.getCurrentScreenController().refreshData();
+        if(contextHandler.getCurrentScreenController()!=null){
+            contextHandler.getCurrentScreenController().refreshData();
+        }
     }
 }
