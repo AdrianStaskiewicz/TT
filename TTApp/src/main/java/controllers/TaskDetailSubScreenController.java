@@ -6,21 +6,16 @@ import enums.TaskStatus;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
+import parameters.ViewPath;
 import requests.TaskRequest;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static enums.TaskStatus.*;
-
-public class TaskDetailSubScreenController implements Initializable {
+public class TaskDetailSubScreenController extends AbstractSubScreenController {
 
     @Getter
     @Setter
@@ -164,32 +159,9 @@ public class TaskDetailSubScreenController implements Initializable {
         data = new TaskDto(task);
     }
 
-    public void goToCreateTaskScreen() {
-        mainScreenController.enableAllButtons();
-
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/CreateTaskSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        CreateTaskSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(mainScreenController);
-        controller.initializeData();
-//        set objects here
-
-        mainScreenController.setView(gridPane);
-    }
-
     @FXML
     public void createTask() {
-        goToCreateTaskScreen();
+        mainScreenController.getScreenHelper().goToSubScreen(ViewPath.CREATE_TASK_SUBSCREEN);
     }
 
     @FXML

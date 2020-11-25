@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CreateTaskSubScreenController implements Initializable {
+public class CreateTaskSubScreenController extends AbstractSubScreenController {
 
     @Getter
     @Setter

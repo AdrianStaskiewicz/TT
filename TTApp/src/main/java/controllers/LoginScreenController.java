@@ -1,6 +1,7 @@
 package controllers;
 
 import context.ContextHandler;
+import helpers.ScreenHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,12 +34,17 @@ public class LoginScreenController implements Initializable {
     @Setter
     private Scene scene;
 
+    @Setter
+    protected ScreenHelper screenHelper;
+
     private AuthenticationRequest authenticationRequest;
     private UserRequest userRequest;
     private ProjectRequest projectRequest;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.screenHelper = new ScreenHelper(stage,scene);
+
         this.authenticationRequest = new AuthenticationRequest();
         this.userRequest = new UserRequest();
         this.projectRequest = new ProjectRequest();
@@ -46,39 +52,19 @@ public class LoginScreenController implements Initializable {
 
     @FXML
     public void login() {
-//TODO uncomment all
         Long userId = authenticationRequest.login(username.getText(), password.getText());
-        if(userId!=null){
-        ContextHandler contextHandler = new ContextHandler();
+        if (userId != null) {
+            ScreenHelper screenHelper = new ScreenHelper();
+            ContextHandler contextHandler = new ContextHandler();
             contextHandler.setCurrentUser(userRequest.findById(userId));
-        gotoMainScreen(contextHandler);
+            screenHelper.configure(stage, scene);
+            screenHelper.goToMainScreen(contextHandler, screenHelper);
         }
 
     }
 
     @FXML
     public void forgetPassword() {
-    }
-
-
-    private void gotoMainScreen(ContextHandler contextHandler) {
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/MainScreen.fxml"));
-
-        try {
-            Parent innerRoot = innerLoader.load();
-            MainScreenController controller = innerLoader.getController();
-
-            scene.setRoot(innerRoot);
-            stage.setScene(scene);
-            stage.setMaximized(true);
-            controller.setContextHandler(contextHandler);
-            controller.initializeData();
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 }

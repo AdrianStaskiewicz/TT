@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WorkItemSubScreenController implements Initializable {
+public class WorkItemSubScreenController extends AbstractSubScreenController {
 
     @Getter
     @Setter

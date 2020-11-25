@@ -5,22 +5,19 @@ import converters.PlanningConverter;
 import dtos.ReleaseDto;
 import dtos.TaskDto;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import lombok.Getter;
 import lombok.Setter;
+import parameters.ViewPath;
 import requests.ReleaseRequest;
 import requests.TaskRequest;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PlanningSubScreenController implements Initializable {
+public class PlanningSubScreenController extends AbstractSubScreenController {
 
     @Getter
     @Setter
@@ -41,7 +38,7 @@ public class PlanningSubScreenController implements Initializable {
 
     @FXML
     public void createTask() {
-        goToCreateTaskScreen();
+        mainScreenController.getScreenHelper().goToSubScreen(ViewPath.CREATE_TASK_SUBSCREEN);
     }
 
     @FXML
@@ -81,6 +78,7 @@ public class PlanningSubScreenController implements Initializable {
 //        releasePane.getChildren().add(new PlanningRelease());//TODO for a moment
     }
 
+    @Override
     public void initializeData() {
         List<TaskDto> taskDtos = new ArrayList<>();
 
@@ -101,54 +99,6 @@ public class PlanningSubScreenController implements Initializable {
 
     }
 
-    public void goToCreateTaskScreen() {
-        mainScreenController.enableAllButtons();
-
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/CreateTaskSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        CreateTaskSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(mainScreenController);
-        controller.initializeData();
-//        set objects here
-
-        mainScreenController.setView(gridPane);
-    }
-
-    public void goToTaskDetailScreenWithDataInitialization(Long taskId) {
-        mainScreenController.enableAllButtons();
-
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/TaskDetailSubScreen2.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        TaskDetailSubScreenController controller = innerLoader.getController();
-        //TODO set main screen controller here
-        controller.initializeData(taskId);
-        controller.setMainScreenController(mainScreenController);
-//        controller.initializeData();
-//        set objects here
-
-        mainScreenController.setView(gridPane);
-    }
-
     @FXML
     public void goToDetailReleaseScreen() {
         System.out.println(planningView.getReleaseValue());
@@ -156,7 +106,7 @@ public class PlanningSubScreenController implements Initializable {
 
     @FXML
     public void goToDetailTaskScreen() {
-        goToTaskDetailScreenWithDataInitialization(planningView.getPositionValue());
+        mainScreenController.getScreenHelper().goToTaskDetailSubScreenWithDataInitialization(planningView.getPositionValue());
     }
 
     private void enableAllButtons() {

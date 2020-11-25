@@ -41,11 +41,6 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
 
     private ProjectRequest projectRequest;
 
-    @FXML
-    public void createTask() {
-        mainScreenController.enableAllButtons();
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.projectRequest = new ProjectRequest();
@@ -65,9 +60,14 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
         projectCardContainer.setValues(FXCollections.observableList(projectModels));
     }
 
+
+    @FXML
+    public void createTask() {
+        mainScreenController.enableAllButtons();
+    }
+
     @FXML
     public void addProject() {
-
         Parent root = null;
 
         FXMLLoader innerLoader = new FXMLLoader();
@@ -108,6 +108,16 @@ public class ProjectSubScreenController extends AbstractSubScreenController{
         mainScreenController.getContextHandler().setAvailableProjects(projectRequest.getAllActiveAssignedToUserByUserId(mainScreenController.getContextHandler().getCurrentUser().getId()));
         mainScreenController.getContextHandler().setCurrentProject(mainScreenController.getContextHandler().getAvailableProjects().get(mainScreenController.getContextHandler().getAvailableProjects().size() - 1));
         mainScreenController.refreshProjectListAndSelectLastCreated();
+    }
+
+    @FXML
+    public void saveProject(){
+
+    }
+
+    @FXML
+    public void doSomething(){
+
     }
 
     @FXML

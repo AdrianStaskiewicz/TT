@@ -127,7 +127,7 @@
                                         </Button>
                                     </children>
                                 </VBox>
-                                <ProjectCardContainer fx:id="projectCardContainer" onAdd="#addProject" onDelete="#deleteProject"/>
+                                <ProjectCardContainer fx:id="projectCardContainer" onAdd="#addProject" onSave="#saveProject" onAction="#doSomething" onDelete="#deleteProject"/>
                             </children>
                         </GridPane>
                     </children>

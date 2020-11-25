@@ -30,9 +30,7 @@ public class Main extends Application {
         try {
             Stage stage = new Stage();
             Parent innerRoot = innerLoader.load();
-            //TODO AS - SETTING ALL REQUIRED OBJECTS
             LoginScreenController controller = innerLoader.getController();
-//            loginScreenController.setClient(client);
 
             stage.setTitle(ParameterProvider.WINDOW_TITLE);
             Scene scene = new Scene(innerRoot, 800, 500);
@@ -41,9 +39,6 @@ public class Main extends Application {
             controller.setStage(stage);
             controller.setScene(scene);
             stage.show();
-
-//            Platform.runLater(loginScreenController.thread::start);
-//            loginScreenController.thread.start();
 
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {

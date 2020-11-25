@@ -2,21 +2,20 @@ package controllers;
 
 import context.ContextHandler;
 import dtos.ProjectDto;
+import helpers.ScreenHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import lombok.Getter;
 import lombok.Setter;
+import parameters.ViewPath;
 import requests.ProjectRequest;
 import requests.UserRequest;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -51,6 +50,10 @@ public class MainScreenController implements Initializable {
     @Setter
     private ContextHandler contextHandler;
 
+    @Getter
+    @Setter
+    private ScreenHelper screenHelper;
+
     private UserRequest userRequest;
     private ProjectRequest projectRequest;
 
@@ -67,6 +70,8 @@ public class MainScreenController implements Initializable {
     }
 
     public void initializeData() {
+        screenHelper.configure(stackPane);
+        screenHelper.configure(this);
         contextHandler.setAvailableProjects(projectRequest.getAllActiveAssignedToUserByUserId(contextHandler.getCurrentUser().getId()));
         if (contextHandler.getAvailableProjects() != null && contextHandler.getAvailableProjects().size() > 0) {
 
@@ -88,25 +93,7 @@ public class MainScreenController implements Initializable {
     private void planning() {
         enableAllButtons();
         planning.setDisable(Boolean.TRUE);
-
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/PlanningSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        PlanningSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(this);
-        controller.initializeData();
-//        set objects here
-
-        setView(gridPane);
+        screenHelper.goToSubScreen(ViewPath.PLANNING_SUBSCREEN);
     }
 
     @FXML
@@ -114,24 +101,7 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         taskBoard.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/TaskBoardSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        TaskBoardSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(this);
-        controller.initializeData();
-//        set objects here
-
-        setView(gridPane);
+        screenHelper.goToSubScreen(ViewPath.TASK_BOARD_SUBSCREEN);
     }
 
     @FXML
@@ -139,23 +109,7 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         workItem.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/WorkItemSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        WorkItemSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(this);
-//        set objects here
-
-        setView(gridPane);
+        screenHelper.goToSubScreen(ViewPath.WORK_ITEM_SUBSCREEN);
     }
 
     @FXML
@@ -163,23 +117,6 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         workItem.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/WorkItemSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        WorkItemSubScreenController controller = innerLoader.getController();
-        controller.setMainScreenController(this);
-//        set objects here
-
-        setView(gridPane);
     }
 
     @FXML
@@ -187,25 +124,7 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         projects.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/ProjectSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        ProjectSubScreenController controller = innerLoader.getController();
-        contextHandler.setCurrentScreenController(controller);
-        controller.setMainScreenController(this);
-        controller.initializeData();
-//        set objects here
-
-        setView(gridPane);
+        screenHelper.goToSubScreen(ViewPath.PROJECT_SUBSCREEN);
     }
 
     @FXML
@@ -213,26 +132,7 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         releases.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/ReleaseSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        ReleaseSubScreenController controller = innerLoader.getController();
-        contextHandler.setCurrentScreenController(controller);
-        controller.setMainScreenController(this);
-        controller.initializeData();
-
-//        set objects here
-
-        setView(gridPane);
+        screenHelper.goToSubScreen(ViewPath.RELEASE_SUBSCREEN);
     }
 
     @FXML
@@ -252,32 +152,7 @@ public class MainScreenController implements Initializable {
         enableAllButtons();
         users.setDisable(Boolean.TRUE);
 
-        FXMLLoader innerLoader = new FXMLLoader();
-        innerLoader.setLocation(this.getClass().getResource("/views/TestSubScreen.fxml"));
-//        ResourceBundle bundle = ResourceBundle.getBundle("gui.resources.lang");
-//        innerLoader.setResources(bundle);
-
-        GridPane gridPane = null;
-        try {
-            gridPane = innerLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        TestSubScreenController controller = innerLoader.getController();
-        contextHandler.setCurrentScreenController(controller);
-        controller.setMainScreenController(this);
-        controller.initializeData();
-
-//        set objects here
-
-        setView(gridPane);
-    }
-
-
-    public void setView(GridPane gridPane) {
-        stackPane.getChildren().clear();
-        stackPane.getChildren().add(gridPane);
+        screenHelper.goToSubScreen(ViewPath.TEST_SUBSCREEN);
     }
 
     public void enableAllButtons() {
@@ -292,18 +167,18 @@ public class MainScreenController implements Initializable {
         users.setDisable(Boolean.FALSE);
     }
 
-    public void refreshProjectList(){
+    public void refreshProjectList() {
         ObservableList<ProjectDto> availableProjectList = FXCollections.observableArrayList(contextHandler.getAvailableProjects());
         projectList.setItems(availableProjectList);
     }
 
-    public void refreshProjectListAndSelectLastCreated(){
+    public void refreshProjectListAndSelectLastCreated() {
         refreshProjectList();
-        projectList.getSelectionModel().select(getContextHandler().getAvailableProjects().size()-1);
+        projectList.getSelectionModel().select(getContextHandler().getAvailableProjects().size() - 1);
     }
 
-    private void refreshDataOnSubScreen(){
-        if(contextHandler.getCurrentScreenController()!=null){
+    private void refreshDataOnSubScreen() {
+        if (contextHandler.getCurrentScreenController() != null) {
             contextHandler.getCurrentScreenController().refreshData();
         }
     }
